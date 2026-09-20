@@ -1,0 +1,6 @@
+{
+  "name": "Thư Mời Cưới Trực Tuyến",
+  "description": "Trang web thiệp cưới online sang trọng và lãng mạn dành cho cô dâu chú rể gửi đến bạn bè và người thân.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

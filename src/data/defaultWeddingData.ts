@@ -1,0 +1,92 @@
+import { WeddingData, GuestWish } from '../types';
+
+export const initialWeddingData: WeddingData = {
+  groom: {
+    fullName: 'Nguyễn Việt Hoàng',
+    shortName: 'Việt Hoàng',
+    avatar: 'https://lh3.googleusercontent.com/d/1O2RMNGu5v77opnKDRZ8d01-mxBRG-cXz',
+    fatherName: 'Nguyễn Bình Minh',
+    motherName: 'Nguyễn Thị Hải Yến',
+    origin: 'Tân Lang',
+    bio: 'Mong ước được cùng người mình yêu thương nhất vun đắp một tổ ấm bình yên và trọn vẹn suốt tháng năm dài.',
+  },
+  bride: {
+    fullName: 'Nguyễn Thị Thái Bình',
+    shortName: 'Thái Bình',
+    avatar: 'https://lh3.googleusercontent.com/d/1uq1aH8COHXoMzIrXWhXcfyPcA7ZtwoUu',
+    fatherName: 'Nguyễn Văn Dũng',
+    motherName: '',
+    origin: 'Tân Nương',
+    bio: 'Hạnh phúc giản đơn là mỗi ngày được cùng anh chia sẻ những niềm vui bình dị và bước tiếp trên con đường chung đôi.',
+  },
+  // Wedding date for countdown (Lễ Thành Hôn: 11:00 ngày 06/12/2026)
+  weddingDate: '2026-12-06T11:00:00',
+  invitationMessage: 'Hôn nhân là lời hứa của hai trái tim cùng chung nhịp đập, cùng nhau đi qua mọi thăng trầm của cuộc đời. Chúng mình rất mong sự hiện diện của bạn để ngày vui thêm trọn vẹn và ý nghĩa!',
+  sweetQuote: 'Đây là lời mời chân thành của chúng em/con để gửi tới quý anh/chị cô/chú vì một vài lý do mà chúng con chưa thể nào mời trực tiếp, chúng con mong đây là một tấm thiệp chân tình có thể mời quý cô/chú anh/chị đến tiệc chung vui với tụi con.',
+  events: [
+    {
+      id: 'event-1',
+      title: 'Lễ Vu Quy',
+      date: '2026-12-05',
+      time: '11:00',
+      lunarDate: 'Ngày 27 tháng 10 năm Bính Ngọ',
+      venueName: 'Tư gia Nhà Gái',
+      address: 'Tư gia Nhà Gái (Sẽ cập nhật địa chỉ cụ thể)',
+      mapUrl: 'https://maps.google.com/?q=Tu+Gia+Nha+Gai',
+      note: 'Trang phục: Tươi sáng, trang trọng',
+    },
+    {
+      id: 'event-2',
+      title: 'Lễ Thành Hôn',
+      date: '2026-12-06',
+      time: '11:00',
+      lunarDate: 'Ngày 28 tháng 10 năm Bính Ngọ',
+      venueName: 'Tư gia Nhà Trai',
+      address: 'Tư gia Nhà Trai (Sẽ cập nhật địa chỉ cụ thể)',
+      mapUrl: 'https://maps.google.com/?q=Tu+Gia+Nha+Trai',
+      note: 'Nghi thức gia tiên & Khai tiệc mừng',
+    },
+  ],
+  loveStories: [],
+  photos: [
+    'https://lh3.googleusercontent.com/d/1O2RMNGu5v77opnKDRZ8d01-mxBRG-cXz',
+    'https://lh3.googleusercontent.com/d/1uq1aH8COHXoMzIrXWhXcfyPcA7ZtwoUu',
+    'https://lh3.googleusercontent.com/d/1VZkunb0zfEu9GsGaeMBFdeZtUOBHcxPT',
+    'https://lh3.googleusercontent.com/d/1uzMyQDte8zs0qo1f02QowW5T6ADAS9zw',
+    'https://lh3.googleusercontent.com/d/1hDPGxpDYR0isxEs93_Na4mpUA9cFQgbV',
+    'https://lh3.googleusercontent.com/d/1AWkndkG0xDOOqJlei2jlNucw4EhD4d93',
+    'https://lh3.googleusercontent.com/d/1nLie36kcrt6RnabOpG3hAylQecgRHQF-',
+    'https://lh3.googleusercontent.com/d/164nrvP5KViQfRVn6QgeQUdHktB0TDrm3',
+    'https://lh3.googleusercontent.com/d/16sE-dB_Vwl1xziLi0NMoVZspkKXqelUO',
+    'https://lh3.googleusercontent.com/d/1NDRjv1f2mnr144OtIl6RRxdIofmgHF56',
+    'https://lh3.googleusercontent.com/d/1gqu0Kbq2cS700hQW1Xb-v19hWmjsgAD-',
+  ],
+  bankAccounts: [],
+  musicTitle: 'Young and Beautiful (Violin Wedding Romance)',
+  musicUrl: 'https://www.youtube.com/watch?v=PZVRF8bBZms',
+  musicStartTime: 153,
+};
+
+export const initialGuestWishes: GuestWish[] = [
+  {
+    id: 'wish-1',
+    senderName: 'Minh Anh & Gia đình',
+    relationship: 'Bạn thân cô dâu',
+    content: 'Chúc đôi bạn trẻ trăm năm hạnh phúc, đầu bạc răng long, mãi luôn ngọt ngào như ngày đầu tiên nhé! Hóng ngày dự tiệc cưới của hai bạn!',
+    createdAt: 'Hôm nay lúc 09:15',
+  },
+  {
+    id: 'wish-2',
+    senderName: 'Văn Đức',
+    relationship: 'Đồng nghiệp chú rể',
+    content: 'Chúc mừng Hoàng Nam đã tìm thấy một nửa tuyệt vời nhất của đời mình. Chúc hai vợ chồng luôn hạnh phúc, sự nghiệp thăng hoa!',
+    createdAt: 'Hôm qua lúc 20:30',
+  },
+  {
+    id: 'wish-3',
+    senderName: 'Thanh Thảo',
+    relationship: 'Hội bạn cấp 3',
+    content: 'Cuối cùng ngày này cũng tới rồi! Chúc Linh của tụi mình sẽ là cô dâu xinh đẹp và hạnh phúc nhất trần đời!',
+    createdAt: '3 ngày trước',
+  },
+];

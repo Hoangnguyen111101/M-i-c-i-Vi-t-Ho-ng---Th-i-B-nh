@@ -19,6 +19,7 @@ import { MusicPlayer } from './components/MusicPlayer';
 import { FallingPetals } from './components/FallingPetals';
 import { GuidanceModal } from './components/GuidanceModal';
 import { EditorModal } from './components/EditorModal';
+import { LinkGeneratorModal } from './components/LinkGeneratorModal';
 import { InvitationDoorIntro } from './components/InvitationDoorIntro';
 
 const WEDDING_STORAGE_KEY = 'wedding_invitation_data_v6';
@@ -26,6 +27,16 @@ const WISHES_STORAGE_KEY = 'wedding_guest_wishes_v1';
 const RSVP_STORAGE_KEY = 'wedding_rsvp_entries_v1';
 
 export default function App() {
+  // Read ?to= from URL parameter for personalized guest invitation
+  const [guestName, setGuestName] = useState<string | null>(() => {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const toParam = params.get('to');
+      return toParam ? toParam.trim() : null;
+    } catch {
+      return null;
+    }
+  });
   // 1. Wedding Data State (persisted to localStorage)
   const [weddingData, setWeddingData] = useState<WeddingData>(() => {
     try {
@@ -69,6 +80,7 @@ export default function App() {
   // Modals state
   const [isGuidanceOpen, setIsGuidanceOpen] = useState(false);
   const [isEditorOpen, setIsEditorOpen] = useState(false);
+  const [isLinkGenOpen, setIsLinkGenOpen] = useState(false);
 
   // Door opening animation state
   const [showDoorIntro, setShowDoorIntro] = useState(true);
@@ -153,6 +165,7 @@ export default function App() {
         <InvitationDoorIntro
           key={doorIntroKey}
           weddingData={weddingData}
+          guestName={guestName}
           onOpen={handleOpenDoor}
         />
       )}
@@ -171,14 +184,12 @@ export default function App() {
       {/* Main Top Navigation */}
       <Navbar
         weddingData={weddingData}
-        onOpenEditor={() => setIsEditorOpen(true)}
-        onOpenGuidance={() => setIsGuidanceOpen(true)}
         onReplayDoor={handleReplayDoor}
       />
 
       <main>
         {/* Hero Section / Cover */}
-        <HeroSection weddingData={weddingData} />
+        <HeroSection weddingData={weddingData} guestName={guestName} />
 
         {/* Real-time Countdown */}
         <CountdownSection weddingData={weddingData} />
@@ -209,9 +220,15 @@ export default function App() {
       {/* Footer */}
       <Footer
         weddingData={weddingData}
+        onOpenLinkGenerator={() => setIsLinkGenOpen(true)}
         onOpenEditor={() => setIsEditorOpen(true)}
-        onOpenGuidance={() => setIsGuidanceOpen(true)}
         onReplayDoor={handleReplayDoor}
+      />
+
+      {/* Personalized Link Generator Tool for the couple */}
+      <LinkGeneratorModal
+        isOpen={isLinkGenOpen}
+        onClose={() => setIsLinkGenOpen(false)}
       />
 
       {/* Senior Dev Guidance Modal for Beginners */}

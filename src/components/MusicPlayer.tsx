@@ -166,8 +166,8 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({
       }
 
       ytPlayerRef.current = new window.YT.Player('yt-hidden-wedding-player', {
-        height: '1',
-        width: '1',
+        height: '0',
+        width: '0',
         videoId: ytVideoId,
         playerVars: {
           autoplay: 0,
@@ -176,6 +176,9 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({
           fs: 0,
           modestbranding: 1,
           rel: 0,
+          playsinline: 1,
+          enablejsapi: 1,
+          origin: window.location.origin,
           start: startTime,
           loop: 1,
           playlist: ytVideoId,
@@ -185,6 +188,17 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({
             if (!isSubscribed) return;
             setIsReady(true);
             try {
+              // Ensure iframe attributes also have playsinline for mobile Safari/Chrome
+              const iframe = event.target.getIframe?.();
+              if (iframe) {
+                iframe.setAttribute('playsinline', '1');
+                iframe.setAttribute('webkit-playsinline', '1');
+                iframe.style.width = '0px';
+                iframe.style.height = '0px';
+                iframe.style.opacity = '0';
+                iframe.style.pointerEvents = 'none';
+                iframe.style.position = 'absolute';
+              }
               event.target.seekTo(startTime, true);
               event.target.setVolume(0);
             } catch {
@@ -304,8 +318,21 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({
 
   return (
     <div id="wedding-music-player" className="fixed bottom-5 right-5 z-40 flex items-center gap-2">
-      {/* Hidden YouTube player container */}
-      <div ref={containerRef} className="hidden" aria-hidden="true" />
+      {/* Hidden YouTube player container strictly hidden on mobile and desktop */}
+      <div
+        ref={containerRef}
+        aria-hidden="true"
+        style={{
+          width: 0,
+          height: 0,
+          opacity: 0,
+          pointerEvents: 'none',
+          position: 'absolute',
+          overflow: 'hidden',
+          top: -9999,
+          left: -9999,
+        }}
+      />
 
       {/* Fallback HTML5 audio element if direct audio url */}
       {!ytVideoId && (

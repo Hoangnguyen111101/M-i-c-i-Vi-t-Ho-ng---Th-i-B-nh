@@ -49,7 +49,7 @@ export const CoupleSection: React.FC<CoupleSectionProps> = ({ weddingData }) => 
               </div>
             </div>
 
-            <h3 className="font-script text-3xl sm:text-4xl text-[#3A2A23] font-normal mb-1">
+            <h3 className="font-serif-title text-2xl sm:text-3xl font-bold text-[#3A2A23] mb-1">
               {weddingData.groom.fullName}
             </h3>
             <span className="text-xs font-medium text-[#B87A65] tracking-widest uppercase mb-3">
@@ -90,7 +90,7 @@ export const CoupleSection: React.FC<CoupleSectionProps> = ({ weddingData }) => 
               </div>
             </div>
 
-            <h3 className="font-script text-3xl sm:text-4xl text-[#3A2A23] font-normal mb-1">
+            <h3 className="font-serif-title text-2xl sm:text-3xl font-bold text-[#3A2A23] mb-1">
               {weddingData.bride.fullName}
             </h3>
             <span className="text-xs font-medium text-[#B87A65] tracking-widest uppercase mb-3">

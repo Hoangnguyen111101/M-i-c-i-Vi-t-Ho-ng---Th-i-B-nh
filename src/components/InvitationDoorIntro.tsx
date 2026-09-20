@@ -5,11 +5,13 @@ import { WeddingData } from '../types';
 
 interface InvitationDoorIntroProps {
   weddingData: WeddingData;
+  guestName?: string | null;
   onOpen?: () => void;
 }
 
 export const InvitationDoorIntro: React.FC<InvitationDoorIntroProps> = ({
   weddingData,
+  guestName,
   onOpen,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -112,7 +114,7 @@ export const InvitationDoorIntro: React.FC<InvitationDoorIntroProps> = ({
         {/* Top Ornate Filigree Corner */}
         <div className="relative z-10 text-left pt-2 sm:pt-4">
           <span className="font-cinzel text-[10px] sm:text-xs tracking-[0.25em] text-[#A68877] uppercase font-bold">
-            Wedding Invitation
+            Thư Mời Đám Cưới
           </span>
           <div className="w-12 h-0.5 bg-[#D9C4B5] mt-1.5" />
         </div>
@@ -138,7 +140,7 @@ export const InvitationDoorIntro: React.FC<InvitationDoorIntroProps> = ({
 
         {/* Bottom text */}
         <div className="relative z-10 text-left pb-2 sm:pb-4">
-          <p className="font-script text-lg sm:text-2xl text-[#8A5E4F]">
+          <p className="font-serif-title italic text-xs sm:text-sm text-[#8A5E4F] font-medium">
             Trân trọng kính mời
           </p>
         </div>
@@ -175,7 +177,7 @@ export const InvitationDoorIntro: React.FC<InvitationDoorIntroProps> = ({
         {/* Top Ornate Corner */}
         <div className="relative z-10 text-right pt-2 sm:pt-4">
           <span className="font-cinzel text-[10px] sm:text-xs tracking-[0.25em] text-[#A68877] uppercase font-bold">
-            Save Our Date
+            Ngày Chung Đôi
           </span>
           <div className="w-12 h-0.5 bg-[#D9C4B5] mt-1.5 ml-auto" />
         </div>
@@ -547,7 +549,13 @@ export const InvitationDoorIntro: React.FC<InvitationDoorIntroProps> = ({
           </div>
 
           {/* CALL TO ACTION BUTTON (Mở Thiệp - Phong cách dễ thương ngọt ngào) */}
-          <div className="mt-1 sm:mt-2 text-center">
+          <div className="mt-1 sm:mt-2 text-center flex flex-col items-center">
+            {guestName && (
+              <div className="mb-2.5 px-4 py-1.5 rounded-full bg-white/95 text-[#8A4F3D] border border-pink-200 shadow-md flex items-center gap-1.5 text-xs sm:text-sm font-medium animate-bounce">
+                <Sparkles className="w-3.5 h-3.5 text-[#E11D48]" />
+                <span>Thân mời: <strong className="font-serif-title font-bold text-[#E11D48] text-sm sm:text-base">{guestName}</strong></span>
+              </div>
+            )}
             <button
               type="button"
               className="px-6 py-2.5 sm:px-8 sm:py-3 rounded-full bg-gradient-to-r from-[#FF6599] via-[#FB7185] to-[#E11D48] text-white font-medium text-xs sm:text-sm tracking-wide shadow-[0_8px_20px_rgba(244,63,94,0.4)] hover:shadow-[0_12px_28px_rgba(244,63,94,0.6)] border-2 border-white/70 flex items-center gap-2 transform active:scale-95 transition-all group-hover:scale-105"

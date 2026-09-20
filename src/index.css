@@ -1,15 +1,19 @@
 @import "tailwindcss";
 
 @layer utilities {
+  /* Font thư pháp mềm mại, hỗ trợ 100% tiếng Việt chuẩn không bị vỡ dấu */
   .font-script {
-    font-family: 'Alex Brush', cursive;
+    font-family: 'Great Vibes', 'Playwrite VN', cursive;
   }
+  /* Font tiêu đề trang trọng có chân, hỗ trợ đầy đủ tiếng Việt */
   .font-serif-title {
     font-family: 'Playfair Display', Georgia, serif;
   }
+  /* Font ngày tháng, số học, tiêu đề phụ hỗ trợ đầy đủ tiếng Việt */
   .font-cinzel {
-    font-family: 'Cinzel', Georgia, serif;
+    font-family: 'Playfair Display', 'Be Vietnam Pro', Georgia, serif;
   }
+  /* Font nội dung chính chuẩn tiếng Việt quốc dân */
   .font-body {
     font-family: 'Be Vietnam Pro', system-ui, sans-serif;
   }
@@ -58,13 +62,16 @@ body {
 ::-webkit-scrollbar {
   width: 6px;
 }
+
 ::-webkit-scrollbar-track {
   background: #FAF7F2;
 }
+
 ::-webkit-scrollbar-thumb {
-  background: #D8C3B5;
-  border-radius: 9999px;
+  background: #D9C4B5;
+  border-radius: 3px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
-  background: #BFA594;
+  background: #C4AFA0;
 }

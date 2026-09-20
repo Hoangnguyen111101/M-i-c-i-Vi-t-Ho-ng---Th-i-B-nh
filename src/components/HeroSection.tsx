@@ -1,13 +1,14 @@
 import React from 'react';
-import { Heart, Calendar, MapPin, ChevronDown } from 'lucide-react';
+import { Heart, Calendar, MapPin, ChevronDown, Sparkles } from 'lucide-react';
 import { WeddingData } from '../types';
 import { normalizeImageUrl } from '../utils/imageHelper';
 
 interface HeroSectionProps {
   weddingData: WeddingData;
+  guestName?: string | null;
 }
 
-export const HeroSection: React.FC<HeroSectionProps> = ({ weddingData }) => {
+export const HeroSection: React.FC<HeroSectionProps> = ({ weddingData, guestName }) => {
   const weddingDateObj = new Date(weddingData.weddingDate);
   const day = weddingDateObj.getDate().toString().padStart(2, '0');
   const month = (weddingDateObj.getMonth() + 1).toString().padStart(2, '0');
@@ -36,23 +37,43 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ weddingData }) => {
       {/* Main Content */}
       <div className="relative z-20 max-w-4xl mx-auto px-4 text-center text-white flex flex-col items-center">
         {/* Top Tagline */}
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 mb-6 text-xs sm:text-sm uppercase tracking-[0.25em] text-[#F3DFD2]">
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 mb-4 text-xs sm:text-sm uppercase tracking-[0.25em] text-[#F3DFD2]">
           <Heart className="w-3.5 h-3.5 fill-[#D48166] text-[#D48166]" />
-          <span>Save The Date • Thư Mời Thành Hôn</span>
+          <span>Ngày Chung Đôi • Thư Mời Đám Cưới</span>
           <Heart className="w-3.5 h-3.5 fill-[#D48166] text-[#D48166]" />
         </div>
 
-        {/* Couple Names - Horizontal layout, elegant smaller font, never vertical */}
-        <div className="my-2 sm:my-4 max-w-full px-2">
-          <h1 className="flex flex-row flex-nowrap items-center justify-center gap-2 sm:gap-4 font-script text-2xl sm:text-4xl md:text-5xl text-[#FFF6EE] leading-normal drop-shadow-md text-center">
-            <span className="whitespace-nowrap">{weddingData.groom.fullName}</span>
-            <span className="text-xl sm:text-3xl md:text-4xl text-[#E8A598] font-normal">&amp;</span>
-            <span className="whitespace-nowrap">{weddingData.bride.fullName}</span>
+        {/* Personalized Guest Badge / Greeting Banner */}
+        <div className="mb-4 animate-in fade-in slide-in-from-top-2 duration-700">
+          {guestName ? (
+            <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-gradient-to-r from-[#D48166]/90 via-[#B86B52]/90 to-[#D48166]/90 backdrop-blur-md border border-[#FADCD1]/50 shadow-xl text-white">
+              <Sparkles className="w-4 h-4 text-yellow-200 animate-pulse" />
+              <div className="text-xs sm:text-sm tracking-wide">
+                <span className="opacity-90 font-light">Thân mời: </span>
+                <span className="font-bold text-yellow-100 font-serif-title text-sm sm:text-base tracking-normal">
+                  {guestName}
+                </span>
+              </div>
+              <Sparkles className="w-4 h-4 text-yellow-200 animate-pulse" />
+            </div>
+          ) : (
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-xs text-[#F5EDE6]/90">
+              <span className="italic">Kính mời: Quý anh/chị &amp; cô/chú</span>
+            </div>
+          )}
+        </div>
+
+        {/* Couple Names - Responsive layout: column on mobile (<768px) and row on desktop */}
+        <div className="my-3 sm:my-4 max-w-full px-4">
+          <h1 className="flex flex-col md:flex-row items-center justify-center gap-1 sm:gap-2 md:gap-4 font-script text-3xl sm:text-4xl md:text-5xl text-[#FFF6EE] leading-snug sm:leading-normal drop-shadow-md text-center">
+            <span className="text-center">{weddingData.groom.fullName}</span>
+            <span className="text-xl sm:text-2xl md:text-4xl text-[#E8A598] font-normal leading-none my-0.5 md:my-0">&amp;</span>
+            <span className="text-center">{weddingData.bride.fullName}</span>
           </h1>
         </div>
 
         {/* Wedding Date Display */}
-        <div className="mt-4 sm:mt-6 flex items-center justify-center gap-3 text-sm sm:text-base font-cinzel tracking-[0.2em] text-[#EAD8CB]">
+        <div className="mt-3 sm:mt-5 flex items-center justify-center gap-3 text-sm sm:text-base font-cinzel tracking-[0.2em] text-[#EAD8CB]">
           <span className="w-8 sm:w-12 h-px bg-[#EAD8CB]/40"></span>
           <div className="flex items-center gap-2">
             <Calendar className="w-4 h-4 text-[#D48166]" />
@@ -69,10 +90,18 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ weddingData }) => {
           </p>
         )}
 
-        {/* Romantic Quote */}
-        <p className="mt-6 max-w-xl text-sm sm:text-base text-[#F5EDE6]/90 italic font-serif-title leading-relaxed px-4">
-          {weddingData.sweetQuote}
-        </p>
+        {/* Romantic Invitation Quote / Personalized message */}
+        <div className="mt-6 max-w-xl px-4">
+          <p className="text-sm sm:text-base text-[#F5EDE6]/95 italic font-serif-title leading-relaxed">
+            {guestName ? (
+              <>
+                &ldquo;Đây là lời mời chân thành của chúng em/con gửi tới <span className="font-semibold text-yellow-200 not-italic">{guestName}</span>. Vì một vài lý do mà chúng con chưa thể gửi thiệp tận tay, chúng con rất mong tấm thiệp chân tình này sẽ được đón chào quý khách đến chung vui ngày hạnh phúc nhất của tụi con!&rdquo;
+              </>
+            ) : (
+              weddingData.sweetQuote
+            )}
+          </p>
+        </div>
 
         {/* Action Buttons */}
         <div className="mt-8 sm:mt-10 flex flex-wrap items-center justify-center gap-4">

@@ -113,10 +113,10 @@ export const InvitationDoorIntro: React.FC<InvitationDoorIntroProps> = ({
 
         {/* Top Ornate Filigree Corner */}
         <div className="relative z-10 text-left pt-2 sm:pt-4">
-          <span className="font-cinzel text-[10px] sm:text-xs tracking-[0.25em] text-[#A68877] uppercase font-bold">
+          <span className="font-cinzel text-[8px] xs:text-[9px] sm:text-xs tracking-normal sm:tracking-[0.2em] text-[#A68877] uppercase font-bold whitespace-nowrap block">
             Thư Mời Đám Cưới
           </span>
-          <div className="w-12 h-0.5 bg-[#D9C4B5] mt-1.5" />
+          <div className="w-8 sm:w-12 h-0.5 bg-[#D9C4B5] mt-1.5" />
         </div>
 
         {/* Center content on Left Door: Groom Initial Crest */}
@@ -176,10 +176,10 @@ export const InvitationDoorIntro: React.FC<InvitationDoorIntroProps> = ({
 
         {/* Top Ornate Corner */}
         <div className="relative z-10 text-right pt-2 sm:pt-4">
-          <span className="font-cinzel text-[10px] sm:text-xs tracking-[0.25em] text-[#A68877] uppercase font-bold">
+          <span className="font-cinzel text-[8px] xs:text-[9px] sm:text-xs tracking-normal sm:tracking-[0.2em] text-[#A68877] uppercase font-bold whitespace-nowrap block">
             Ngày Chung Đôi
           </span>
-          <div className="w-12 h-0.5 bg-[#D9C4B5] mt-1.5 ml-auto" />
+          <div className="w-8 sm:w-12 h-0.5 bg-[#D9C4B5] mt-1.5 ml-auto" />
         </div>
 
         {/* Center content on Right Door: Bride Initial Crest */}

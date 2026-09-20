@@ -15,7 +15,7 @@ export const initialWeddingData: WeddingData = {
     shortName: 'Thái Bình',
     avatar: 'https://lh3.googleusercontent.com/d/1uq1aH8COHXoMzIrXWhXcfyPcA7ZtwoUu',
     fatherName: 'Nguyễn Văn Dũng',
-    motherName: '',
+    motherName: 'Nguyễn Thị Điệp',
     origin: 'Tân Nương',
     bio: 'Hạnh phúc giản đơn là mỗi ngày được cùng anh chia sẻ những niềm vui bình dị và bước tiếp trên con đường chung đôi.',
   },

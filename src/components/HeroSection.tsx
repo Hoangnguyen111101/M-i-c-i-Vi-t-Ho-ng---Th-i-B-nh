@@ -37,10 +37,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ weddingData, guestName
       {/* Main Content */}
       <div className="relative z-20 max-w-4xl mx-auto px-4 text-center text-white flex flex-col items-center">
         {/* Top Tagline */}
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 mb-4 text-xs sm:text-sm uppercase tracking-[0.25em] text-[#F3DFD2]">
-          <Heart className="w-3.5 h-3.5 fill-[#D48166] text-[#D48166]" />
+        <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3.5 sm:px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 mb-4 text-[10.5px] sm:text-sm uppercase tracking-wider sm:tracking-[0.25em] text-[#F3DFD2] whitespace-nowrap">
+          <Heart className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-[#D48166] text-[#D48166] shrink-0" />
           <span>Ngày Chung Đôi • Thư Mời Đám Cưới</span>
-          <Heart className="w-3.5 h-3.5 fill-[#D48166] text-[#D48166]" />
+          <Heart className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-[#D48166] text-[#D48166] shrink-0" />
         </div>
 
         {/* Personalized Guest Badge / Greeting Banner */}

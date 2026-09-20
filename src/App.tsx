@@ -22,7 +22,7 @@ import { EditorModal } from './components/EditorModal';
 import { LinkGeneratorModal } from './components/LinkGeneratorModal';
 import { InvitationDoorIntro } from './components/InvitationDoorIntro';
 
-const WEDDING_STORAGE_KEY = 'wedding_invitation_data_v6';
+const WEDDING_STORAGE_KEY = 'wedding_invitation_data_v7';
 const WISHES_STORAGE_KEY = 'wedding_guest_wishes_v1';
 const RSVP_STORAGE_KEY = 'wedding_rsvp_entries_v1';
 
@@ -40,12 +40,16 @@ export default function App() {
   // 1. Wedding Data State (persisted to localStorage)
   const [weddingData, setWeddingData] = useState<WeddingData>(() => {
     try {
-      const saved = localStorage.getItem(WEDDING_STORAGE_KEY);
+      const saved = localStorage.getItem(WEDDING_STORAGE_KEY) || localStorage.getItem('wedding_invitation_data_v6');
       if (saved) {
         const parsed = JSON.parse(saved);
         // Ensure only 2 ceremonies: Lễ Vu Quy & Lễ Thành Hôn
         if (parsed.events && parsed.events.length > 2) {
           parsed.events = initialWeddingData.events;
+        }
+        // Ensure bride mother name is updated if empty
+        if (parsed.bride && !parsed.bride.motherName) {
+          parsed.bride.motherName = initialWeddingData.bride.motherName;
         }
         return parsed;
       }

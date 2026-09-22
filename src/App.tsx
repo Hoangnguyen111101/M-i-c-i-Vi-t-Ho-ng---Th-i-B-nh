@@ -4,13 +4,15 @@
  */
 
 import React, { useState, useEffect } from 'react';
-import { initialWeddingData } from './data/defaultWeddingData';
-import { WeddingData, RsvpEntry } from './types';
+import { initialWeddingData, initialGuestWishes } from './data/defaultWeddingData';
+import { WeddingData, GuestWish, RsvpEntry } from './types';
 import { Navbar } from './components/Navbar';
 import { HeroSection } from './components/HeroSection';
 import { CountdownSection } from './components/CountdownSection';
 import { CoupleSection } from './components/CoupleSection';
 import { EventsSection } from './components/EventsSection';
+import { GallerySection } from './components/GallerySection';
+import { GuestbookSection } from './components/GuestbookSection';
 import { RsvpSection } from './components/RsvpSection';
 import { Footer } from './components/Footer';
 import { MusicPlayer } from './components/MusicPlayer';
@@ -75,13 +77,6 @@ export default function App() {
           if (!parsed.groom.origin || parsed.groom.origin === 'Tân Lang') {
             parsed.groom.origin = initialWeddingData.groom.origin;
           }
-          parsed.groom.bio = '';
-        }
-        if (parsed.bride) {
-          if (!parsed.bride.origin || parsed.bride.origin === 'Tân Nương') {
-            parsed.bride.origin = initialWeddingData.bride.origin;
-          }
-          parsed.bride.bio = '';
         }
         return parsed;
       }
@@ -91,7 +86,18 @@ export default function App() {
     return initialWeddingData;
   });
 
-  // RSVP Entries State
+  // 2. Guest Wishes State
+  const [guestWishes, setGuestWishes] = useState<GuestWish[]>(() => {
+    try {
+      const saved = localStorage.getItem(WISHES_STORAGE_KEY);
+      if (saved) return JSON.parse(saved);
+    } catch {
+      // ignore
+    }
+    return initialGuestWishes;
+  });
+
+  // 3. RSVP Entries State
   const [rsvpList, setRsvpList] = useState<RsvpEntry[]>(() => {
     try {
       const saved = localStorage.getItem(RSVP_STORAGE_KEY);
@@ -123,11 +129,29 @@ export default function App() {
 
   useEffect(() => {
     try {
+      localStorage.setItem(WISHES_STORAGE_KEY, JSON.stringify(guestWishes));
+    } catch {
+      // ignore
+    }
+  }, [guestWishes]);
+
+  useEffect(() => {
+    try {
       localStorage.setItem(RSVP_STORAGE_KEY, JSON.stringify(rsvpList));
     } catch {
       // ignore
     }
   }, [rsvpList]);
+
+  // Handle adding new wish
+  const handleAddWish = (newWish: Omit<GuestWish, 'id' | 'createdAt'>) => {
+    const wishEntry: GuestWish = {
+      ...newWish,
+      id: `wish-${Date.now()}`,
+      createdAt: 'Vừa xong',
+    };
+    setGuestWishes((prev) => [wishEntry, ...prev]);
+  };
 
   // Handle adding new RSVP response
   const handleAddRsvp = (newRsvp: Omit<RsvpEntry, 'id' | 'createdAt'>) => {
@@ -206,6 +230,15 @@ export default function App() {
 
         {/* Events / Timeline & Map (Lễ Vu Quy & Lễ Thành Hôn) */}
         <EventsSection weddingData={weddingData} />
+
+        {/* Wedding Photo Gallery with Lightbox */}
+        <GallerySection weddingData={weddingData} />
+
+        {/* Guestbook & Wishes */}
+        <GuestbookSection
+          wishes={guestWishes}
+          onAddWish={handleAddWish}
+        />
 
         {/* Attendance RSVP Form */}
         <RsvpSection

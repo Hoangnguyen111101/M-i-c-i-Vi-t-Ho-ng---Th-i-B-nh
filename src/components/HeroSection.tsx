@@ -107,9 +107,15 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ weddingData, guestName
         <div className="mt-8 sm:mt-10 flex flex-wrap items-center justify-center gap-4">
           <a
             href="#xac-nhan-tham-du"
-            className="px-8 py-3.5 rounded-full text-sm sm:text-base font-semibold tracking-wide bg-[#D48166] text-white hover:bg-[#BF6F55] shadow-lg shadow-[#D48166]/25 transition-all transform hover:-translate-y-0.5 active:translate-y-0"
+            className="px-7 py-3 rounded-full text-sm font-semibold tracking-wide bg-[#D48166] text-white hover:bg-[#BF6F55] shadow-lg shadow-[#D48166]/25 transition-all transform hover:-translate-y-0.5 active:translate-y-0"
           >
             Xác Nhận Tham Dự (RSVP)
+          </a>
+          <a
+            href="#hop-mung-cuoi"
+            className="px-7 py-3 rounded-full text-sm font-semibold tracking-wide bg-white/15 backdrop-blur-md text-white border border-white/30 hover:bg-white/25 transition-all transform hover:-translate-y-0.5 active:translate-y-0"
+          >
+            Hộp Mừng Cưới
           </a>
         </div>
 

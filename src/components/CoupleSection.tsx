@@ -58,7 +58,7 @@ export const CoupleSection: React.FC<CoupleSectionProps> = ({ weddingData }) => 
 
             {/* Parents info */}
             {(weddingData.groom.fatherName || weddingData.groom.motherName) && (
-              <div className="text-xs sm:text-sm text-[#735F53] space-y-1 py-2 px-4 rounded-xl bg-white/70 border border-[#ECE0D6] w-full max-w-xs">
+              <div className="text-xs sm:text-sm text-[#735F53] space-y-1 mb-4 py-2 px-4 rounded-xl bg-white/70 border border-[#ECE0D6] w-full max-w-xs">
                 <div className="font-medium text-[#4D3A2F]">Nhà Trai</div>
                 {weddingData.groom.fatherName && (
                   <div>Ông: <span className="font-semibold text-[#3A2A23]">{weddingData.groom.fatherName}</span></div>
@@ -68,6 +68,10 @@ export const CoupleSection: React.FC<CoupleSectionProps> = ({ weddingData }) => 
                 )}
               </div>
             )}
+
+            <p className="text-xs sm:text-sm text-[#615147] italic leading-relaxed max-w-sm">
+              "{weddingData.groom.bio}"
+            </p>
           </div>
 
           {/* Bride Card */}
@@ -95,7 +99,7 @@ export const CoupleSection: React.FC<CoupleSectionProps> = ({ weddingData }) => 
 
             {/* Parents info */}
             {(weddingData.bride.fatherName || weddingData.bride.motherName) && (
-              <div className="text-xs sm:text-sm text-[#735F53] space-y-1 py-2 px-4 rounded-xl bg-white/70 border border-[#ECE0D6] w-full max-w-xs">
+              <div className="text-xs sm:text-sm text-[#735F53] space-y-1 mb-4 py-2 px-4 rounded-xl bg-white/70 border border-[#ECE0D6] w-full max-w-xs">
                 <div className="font-medium text-[#4D3A2F]">Nhà Gái</div>
                 {weddingData.bride.fatherName && (
                   <div>Ông: <span className="font-semibold text-[#3A2A23]">{weddingData.bride.fatherName}</span></div>
@@ -105,6 +109,10 @@ export const CoupleSection: React.FC<CoupleSectionProps> = ({ weddingData }) => 
                 )}
               </div>
             )}
+
+            <p className="text-xs sm:text-sm text-[#615147] italic leading-relaxed max-w-sm">
+              "{weddingData.bride.bio}"
+            </p>
           </div>
         </div>
       </div>

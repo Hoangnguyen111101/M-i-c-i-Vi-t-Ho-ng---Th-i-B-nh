@@ -8,7 +8,7 @@ export const initialWeddingData: WeddingData = {
     fatherName: 'Nguyễn Bình Minh',
     motherName: 'Nguyễn Thị Hải Yến',
     origin: 'Đại Hoàng tử',
-    bio: 'Mong ước được cùng người mình yêu thương nhất vun đắp một tổ ấm bình yên và trọn vẹn suốt tháng năm dài.',
+    bio: '',
   },
   bride: {
     fullName: 'Nguyễn Thị Thái Bình',
@@ -17,7 +17,7 @@ export const initialWeddingData: WeddingData = {
     fatherName: 'Huỳnh Trí Dũng',
     motherName: 'Nguyễn Hoàng Mộng Điệp',
     origin: 'Tiểu công chúa',
-    bio: 'Hạnh phúc giản đơn là mỗi ngày được cùng anh chia sẻ những niềm vui bình dị và bước tiếp trên con đường chung đôi.',
+    bio: '',
   },
   // Wedding date for countdown (Lễ Thành Hôn: 11:00 ngày 06/12/2026)
   weddingDate: '2026-12-06T11:00:00',

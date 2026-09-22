@@ -25,8 +25,6 @@ export const Navbar: React.FC<NavbarProps> = ({
   const navLinks = [
     { name: 'Cặp Đôi', href: '#cap-doi' },
     { name: 'Lịch Trình', href: '#lich-trinh' },
-    { name: 'Album Ảnh', href: '#album-anh' },
-    { name: 'Lời Chúc', href: '#so-luu-but' },
     { name: 'Xác Nhận (RSVP)', href: '#xac-nhan-tham-du' },
   ];
 

@@ -88,12 +88,12 @@ export const Navbar: React.FC<NavbarProps> = ({
               onClick={onReplayDoor}
               className={`flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3.5 py-1.5 rounded-full text-[11px] sm:text-xs font-semibold tracking-wide transition-all shadow-sm active:scale-95 border shrink-0 ${
                 isScrolled
-                  ? 'bg-red-50 text-red-800 border-red-200 hover:bg-red-100'
+                  ? 'bg-pink-50 text-pink-700 border-pink-200 hover:bg-pink-100'
                   : 'bg-white/20 text-white border-white/40 hover:bg-white/30 backdrop-blur-sm'
               }`}
               title="Xem lại hiệu ứng mở cánh cửa thiệp cưới"
             >
-              <Sparkles className="w-3.5 h-3.5 text-red-500 shrink-0" />
+              <Sparkles className="w-3.5 h-3.5 text-pink-400 shrink-0" />
               <span className="whitespace-nowrap">Mở lại thiệp</span>
             </button>
           )}

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Sparkles, Heart, Music } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { WeddingData } from '../types';
-import { RedVelvetBow } from './RedVelvetBow';
+import { IllustrationPinkBow } from './IllustrationPinkBow';
 
 interface InvitationDoorIntroProps {
   weddingData: WeddingData;
@@ -22,13 +22,13 @@ export const InvitationDoorIntro: React.FC<InvitationDoorIntroProps> = ({
     if (isOpen) return;
     setIsOpen(true);
 
-    // 1. Fire celebratory confetti shower in romantic red velvet, rose gold, and champagne gold
+    // 1. Fire celebratory confetti shower in romantic pink, rose, and champagne gold
     try {
       confetti({
         particleCount: 75,
         spread: 85,
         origin: { y: 0.55, x: 0.5 },
-        colors: ['#C4122D', '#990017', '#E5C185', '#FDE047', '#FAF5EE', '#800010'],
+        colors: ['#EA5B84', '#F791B1', '#FF85A2', '#FDE047', '#FFFFFF', '#BE185D'],
         ticks: 220,
         gravity: 0.8,
         scalar: 1.15,
@@ -40,14 +40,14 @@ export const InvitationDoorIntro: React.FC<InvitationDoorIntroProps> = ({
           angle: 60,
           spread: 65,
           origin: { x: 0.1, y: 0.6 },
-          colors: ['#C4122D', '#E5C185', '#FDE047', '#800010'],
+          colors: ['#EA5B84', '#F791B1', '#FDE047', '#BE185D'],
         });
         confetti({
           particleCount: 50,
           angle: 120,
           spread: 65,
           origin: { x: 0.9, y: 0.6 },
-          colors: ['#C4122D', '#E5C185', '#FDE047', '#800010'],
+          colors: ['#EA5B84', '#F791B1', '#FDE047', '#BE185D'],
         });
       }, 300);
     } catch {
@@ -122,11 +122,11 @@ export const InvitationDoorIntro: React.FC<InvitationDoorIntroProps> = ({
         </div>
 
         {/* Ribbon band running horizontally on Left Door */}
-        <div className="absolute top-1/2 -translate-y-1/2 left-0 right-0 h-16 sm:h-20 bg-gradient-to-r from-[#66000D] via-[#A80D25] to-[#D61836] shadow-lg border-y-2 border-[#E5C185]/80 pointer-events-none flex items-center justify-end pr-3">
-          {/* Ribbon woven stitch lines with luxury golden dashes */}
-          <div className="w-full h-full flex flex-col justify-between py-1.5 opacity-70">
-            <div className="border-b-2 border-dashed border-[#FFF3D6]" />
-            <div className="border-t-2 border-dashed border-[#FFF3D6]" />
+        <div className="absolute top-1/2 -translate-y-1/2 left-0 right-0 h-16 sm:h-20 bg-gradient-to-r from-[#FBCFE8] via-[#EA5B84] to-[#BE185D] shadow-lg border-y-2 border-white/80 pointer-events-none flex items-center justify-end pr-3">
+          {/* Ribbon woven stitch lines with cute white dashes */}
+          <div className="w-full h-full flex flex-col justify-between py-1.5 opacity-75">
+            <div className="border-b-2 border-dashed border-white" />
+            <div className="border-t-2 border-dashed border-white" />
           </div>
         </div>
       </div>
@@ -170,16 +170,16 @@ export const InvitationDoorIntro: React.FC<InvitationDoorIntroProps> = ({
         </div>
 
         {/* Ribbon band running horizontally on Right Door */}
-        <div className="absolute top-1/2 -translate-y-1/2 left-0 right-0 h-16 sm:h-20 bg-gradient-to-r from-[#D61836] via-[#A80D25] to-[#66000D] shadow-lg border-y-2 border-[#E5C185]/80 pointer-events-none flex items-center justify-start pl-3">
-          {/* Ribbon woven stitch lines with luxury golden dashes */}
-          <div className="w-full h-full flex flex-col justify-between py-1.5 opacity-70">
-            <div className="border-b-2 border-dashed border-[#FFF3D6]" />
-            <div className="border-t-2 border-dashed border-[#FFF3D6]" />
+        <div className="absolute top-1/2 -translate-y-1/2 left-0 right-0 h-16 sm:h-20 bg-gradient-to-r from-[#BE185D] via-[#EA5B84] to-[#FBCFE8] shadow-lg border-y-2 border-white/80 pointer-events-none flex items-center justify-start pl-3">
+          {/* Ribbon woven stitch lines with cute white dashes */}
+          <div className="w-full h-full flex flex-col justify-between py-1.5 opacity-75">
+            <div className="border-b-2 border-dashed border-white" />
+            <div className="border-t-2 border-dashed border-white" />
           </div>
         </div>
       </div>
 
-      {/* ==================== Ở GIỮA: CHIẾC NƠ NHUNG ĐỎ SANG TRỌNG & HOÀNG GIA ==================== */}
+      {/* ==================== Ở GIỮA: CHIẾC NƠ HỒNG DỄ THƯƠNG THEO MẪU ==================== */}
       <div
         className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 flex flex-col items-center justify-center transition-all duration-700 ${
           isOpen
@@ -188,43 +188,43 @@ export const InvitationDoorIntro: React.FC<InvitationDoorIntroProps> = ({
         }`}
         onClick={handleOpenDoors}
       >
-        {/* Soft Dreamy Crimson & Gold Glow Halo behind Red Velvet Bow */}
-        <div className="absolute -inset-12 sm:-inset-20 bg-gradient-to-r from-red-600/35 via-rose-600/30 to-amber-400/25 rounded-full blur-3xl animate-cute-glow pointer-events-none" />
+        {/* Soft Dreamy Pink Glow Halo behind Bow */}
+        <div className="absolute -inset-12 sm:-inset-20 bg-gradient-to-r from-pink-400/35 via-rose-300/30 to-pink-200/40 rounded-full blur-3xl animate-cute-glow pointer-events-none" />
 
         {/* Interactive Bow Container with gentle floating & hover bounce */}
         <div className="relative group flex flex-col items-center p-2 sm:p-4">
-          {/* THE LUXURIOUS RED VELVET BOW */}
+          {/* THE EXACT CUTE PINK BOW */}
           <div className="relative animate-cute-float">
-            <RedVelvetBow isOpen={isOpen} />
+            <IllustrationPinkBow isOpen={isOpen} />
 
             {/* Sparkle star accents on bow */}
             <div className="absolute top-3 right-5 text-yellow-300 animate-spin-slow pointer-events-none">
               <Sparkles className="w-7 h-7 drop-shadow-md" />
             </div>
-            <div className="absolute top-6 left-5 text-amber-200 animate-pulse pointer-events-none">
+            <div className="absolute top-6 left-5 text-pink-300 animate-pulse pointer-events-none">
               <Sparkles className="w-5 h-5 drop-shadow" />
             </div>
           </div>
 
-          {/* CALL TO ACTION BUTTON (Mở Thiệp - Phong cách nơ đỏ hoàng gia sang trọng) */}
+          {/* CALL TO ACTION BUTTON (Mở Thiệp - Phong cách ngọt ngào dễ thương) */}
           <div className="mt-1 sm:mt-2 text-center flex flex-col items-center">
             {guestName && (
-              <div className="mb-2.5 px-4 py-1.5 rounded-full bg-white/95 text-[#7E0013] border border-red-200 shadow-md flex items-center gap-1.5 text-xs sm:text-sm font-medium animate-bounce">
-                <Sparkles className="w-3.5 h-3.5 text-[#C4122D]" />
-                <span>Thân mời: <strong className="font-serif-title font-bold text-[#C4122D] text-sm sm:text-base">{guestName}</strong></span>
+              <div className="mb-2.5 px-4 py-1.5 rounded-full bg-white/95 text-[#9E2048] border border-pink-200 shadow-md flex items-center gap-1.5 text-xs sm:text-sm font-medium animate-bounce">
+                <Sparkles className="w-3.5 h-3.5 text-[#EA5B84]" />
+                <span>Thân mời: <strong className="font-serif-title font-bold text-[#BE185D] text-sm sm:text-base">{guestName}</strong></span>
               </div>
             )}
             <button
               type="button"
-              className="px-6 py-2.5 sm:px-8 sm:py-3 rounded-full bg-gradient-to-r from-[#8B0014] via-[#C4122D] to-[#7A0010] text-white font-medium text-xs sm:text-sm tracking-wide shadow-[0_10px_25px_rgba(139,0,20,0.45)] hover:shadow-[0_14px_32px_rgba(139,0,20,0.65)] border-2 border-[#F5D59A]/85 flex items-center gap-2 transform active:scale-95 transition-all group-hover:scale-105"
+              className="px-6 py-2.5 sm:px-8 sm:py-3 rounded-full bg-gradient-to-r from-[#EA5B84] via-[#F47293] to-[#BE185D] text-white font-medium text-xs sm:text-sm tracking-wide shadow-[0_10px_25px_rgba(234,91,132,0.45)] hover:shadow-[0_14px_32px_rgba(234,91,132,0.65)] border-2 border-white/80 flex items-center gap-2 transform active:scale-95 transition-all group-hover:scale-105"
             >
-              <Heart className="w-4 h-4 fill-[#FDE047] text-[#FDE047] animate-bounce" />
-              <span className="font-bold whitespace-nowrap">Chạm vào nơ đỏ để mở thiệp nha ❤️</span>
-              <Sparkles className="w-3.5 h-3.5 text-[#FDE047]" />
+              <Heart className="w-4 h-4 fill-white text-white animate-bounce" />
+              <span className="font-bold whitespace-nowrap">Chạm vào nơ để mở thiệp nha 💕</span>
+              <Sparkles className="w-3.5 h-3.5 text-yellow-200" />
             </button>
 
-            <p className="mt-2 text-[11px] sm:text-xs text-[#6B3224] font-semibold flex items-center justify-center gap-1.5 bg-white/80 backdrop-blur-sm px-3.5 py-1 rounded-full border border-[#EADBCE] shadow-xs mx-auto w-fit">
-              <Music className="w-3 h-3 text-[#C4122D]" />
+            <p className="mt-2 text-[11px] sm:text-xs text-[#8A5243] font-semibold flex items-center justify-center gap-1.5 bg-white/85 backdrop-blur-sm px-3.5 py-1 rounded-full border border-[#EADBCE] shadow-xs mx-auto w-fit">
+              <Music className="w-3 h-3 text-[#EA5B84]" />
               <span>Nhạc cưới tự động phát khi mở</span>
             </p>
           </div>

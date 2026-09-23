@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Music, Play, Pause } from 'lucide-react';
+import { useLanguage } from '../i18n/LanguageContext';
 
 interface MusicPlayerProps {
   title?: string;
@@ -29,6 +30,7 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({
   startTime = 153,
   autoPlayTrigger = false,
 }) => {
+  const { t } = useLanguage();
   const [isPlaying, setIsPlaying] = useState(false);
   const [isReady, setIsReady] = useState(false);
   const [hasInteracted, setHasInteracted] = useState(false);
@@ -363,7 +365,7 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({
       <button
         type="button"
         onClick={togglePlay}
-        title={isPlaying ? 'Tạm dừng nhạc cưới' : 'Bật nhạc cưới lãng mạn'}
+        title={isPlaying ? t.music.playingTooltip : t.music.pausedTooltip}
         className={`relative w-12 h-12 rounded-full flex items-center justify-center shadow-xl border-2 transition-transform transform active:scale-95 ${
           isPlaying
             ? 'bg-[#43302B] border-[#D4AF37] text-[#FAF7F2] animate-spin-slow'

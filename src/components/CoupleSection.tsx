@@ -2,12 +2,15 @@ import React from 'react';
 import { Heart, Sparkles } from 'lucide-react';
 import { WeddingData } from '../types';
 import { normalizeImageUrl } from '../utils/imageHelper';
+import { useLanguage } from '../i18n/LanguageContext';
 
 interface CoupleSectionProps {
   weddingData: WeddingData;
 }
 
 export const CoupleSection: React.FC<CoupleSectionProps> = ({ weddingData }) => {
+  const { t, language } = useLanguage();
+
   return (
     <section id="cap-doi" className="py-20 sm:py-24 bg-white relative overflow-hidden">
       {/* Subtle Background Accent */}
@@ -21,13 +24,13 @@ export const CoupleSection: React.FC<CoupleSectionProps> = ({ weddingData }) => 
         <div className="text-center max-w-2xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#FAF2ED] border border-[#ECD9CC] text-[#915442] text-xs font-semibold uppercase tracking-widest mb-3">
             <Sparkles className="w-3.5 h-3.5 text-[#B87A65]" />
-            <span>Cô Dâu &amp; Chú Rể</span>
+            <span>{t.couple.badge}</span>
           </div>
           <h2 className="font-serif-title text-3xl sm:text-4xl text-[#332620] font-bold">
-            Hai Nửa Yêu Thương
+            {t.couple.title}
           </h2>
           <p className="mt-4 text-[#665449] text-sm sm:text-base leading-relaxed">
-            {weddingData.invitationMessage}
+            {language === 'ja' ? t.couple.defaultStory : weddingData.invitationMessage}
           </p>
         </div>
 
@@ -45,7 +48,7 @@ export const CoupleSection: React.FC<CoupleSectionProps> = ({ weddingData }) => 
                 />
               </div>
               <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-[#8A4F3D] text-white text-xs font-medium tracking-wider uppercase shadow-sm">
-                Chú Rể
+                {t.couple.groomBadge}
               </div>
             </div>
 
@@ -56,15 +59,15 @@ export const CoupleSection: React.FC<CoupleSectionProps> = ({ weddingData }) => 
               {weddingData.groom.origin}
             </span>
 
-            {/* Parents info */}
+            {/* Parents info - Names preserved in Vietnamese original */}
             {(weddingData.groom.fatherName || weddingData.groom.motherName) && (
               <div className="text-xs sm:text-sm text-[#735F53] space-y-1 mb-4 py-2 px-4 rounded-xl bg-white/70 border border-[#ECE0D6] w-full max-w-xs">
-                <div className="font-medium text-[#4D3A2F]">Nhà Trai</div>
+                <div className="font-medium text-[#4D3A2F]">{t.couple.groomFamily}</div>
                 {weddingData.groom.fatherName && (
-                  <div>Ông: <span className="font-semibold text-[#3A2A23]">{weddingData.groom.fatherName}</span></div>
+                  <div>{t.couple.fatherLabel} <span className="font-semibold text-[#3A2A23]">{weddingData.groom.fatherName}</span></div>
                 )}
                 {weddingData.groom.motherName && (
-                  <div>Bà: <span className="font-semibold text-[#3A2A23]">{weddingData.groom.motherName}</span></div>
+                  <div>{t.couple.motherLabel} <span className="font-semibold text-[#3A2A23]">{weddingData.groom.motherName}</span></div>
                 )}
               </div>
             )}
@@ -82,7 +85,7 @@ export const CoupleSection: React.FC<CoupleSectionProps> = ({ weddingData }) => 
                 />
               </div>
               <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-[#C8755D] text-white text-xs font-medium tracking-wider uppercase shadow-sm">
-                Cô Dâu
+                {t.couple.brideBadge}
               </div>
             </div>
 
@@ -93,15 +96,15 @@ export const CoupleSection: React.FC<CoupleSectionProps> = ({ weddingData }) => 
               {weddingData.bride.origin}
             </span>
 
-            {/* Parents info */}
+            {/* Parents info - Names preserved in Vietnamese original */}
             {(weddingData.bride.fatherName || weddingData.bride.motherName) && (
               <div className="text-xs sm:text-sm text-[#735F53] space-y-1 mb-4 py-2 px-4 rounded-xl bg-white/70 border border-[#ECE0D6] w-full max-w-xs">
-                <div className="font-medium text-[#4D3A2F]">Nhà Gái</div>
+                <div className="font-medium text-[#4D3A2F]">{t.couple.brideFamily}</div>
                 {weddingData.bride.fatherName && (
-                  <div>Ông: <span className="font-semibold text-[#3A2A23]">{weddingData.bride.fatherName}</span></div>
+                  <div>{t.couple.fatherLabel} <span className="font-semibold text-[#3A2A23]">{weddingData.bride.fatherName}</span></div>
                 )}
                 {weddingData.bride.motherName && (
-                  <div>Bà: <span className="font-semibold text-[#3A2A23]">{weddingData.bride.motherName}</span></div>
+                  <div>{t.couple.motherLabel} <span className="font-semibold text-[#3A2A23]">{weddingData.bride.motherName}</span></div>
                 )}
               </div>
             )}

@@ -2,6 +2,7 @@ import React from 'react';
 import { Heart, Calendar, MapPin, ChevronDown, Sparkles } from 'lucide-react';
 import { WeddingData } from '../types';
 import { normalizeImageUrl } from '../utils/imageHelper';
+import { useLanguage } from '../i18n/LanguageContext';
 
 interface HeroSectionProps {
   weddingData: WeddingData;
@@ -9,6 +10,7 @@ interface HeroSectionProps {
 }
 
 export const HeroSection: React.FC<HeroSectionProps> = ({ weddingData, guestName }) => {
+  const { t, language } = useLanguage();
   const weddingDateObj = new Date(weddingData.weddingDate);
   const day = weddingDateObj.getDate().toString().padStart(2, '0');
   const month = (weddingDateObj.getMonth() + 1).toString().padStart(2, '0');
@@ -39,7 +41,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ weddingData, guestName
         {/* Top Tagline */}
         <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3.5 sm:px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 mb-4 text-[10.5px] sm:text-sm uppercase tracking-wider sm:tracking-[0.25em] text-[#F3DFD2] whitespace-nowrap">
           <Heart className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-[#D48166] text-[#D48166] shrink-0" />
-          <span>Ngày Chung Đôi • Thư Mời Đám Cưới</span>
+          <span>{t.hero.tagline}</span>
           <Heart className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-[#D48166] text-[#D48166] shrink-0" />
         </div>
 
@@ -49,16 +51,17 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ weddingData, guestName
             <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-gradient-to-r from-[#D48166]/90 via-[#B86B52]/90 to-[#D48166]/90 backdrop-blur-md border border-[#FADCD1]/50 shadow-xl text-white">
               <Sparkles className="w-4 h-4 text-yellow-200 animate-pulse" />
               <div className="text-xs sm:text-sm tracking-wide">
-                <span className="opacity-90 font-light">Thân mời: </span>
+                <span className="opacity-90 font-light">{t.hero.invitedPrefix} </span>
                 <span className="font-bold text-yellow-100 font-serif-title text-sm sm:text-base tracking-normal">
                   {guestName}
                 </span>
+                {language === 'ja' && <span className="opacity-90 font-light"> 様</span>}
               </div>
               <Sparkles className="w-4 h-4 text-yellow-200 animate-pulse" />
             </div>
           ) : (
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-xs text-[#F5EDE6]/90">
-              <span className="italic">Kính mời: Quý anh/chị &amp; cô/chú</span>
+              <span className="italic">{t.hero.generalGreeting}</span>
             </div>
           )}
         </div>
@@ -77,7 +80,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ weddingData, guestName
           <span className="w-8 sm:w-12 h-px bg-[#EAD8CB]/40"></span>
           <div className="flex items-center gap-2">
             <Calendar className="w-4 h-4 text-[#D48166]" />
-            <span className="font-semibold">{`${day} • ${month} • ${year}`}</span>
+            <span className="font-semibold">
+              {language === 'ja' ? `${year}年 ${month}月 ${day}日` : `${day} • ${month} • ${year}`}
+            </span>
           </div>
           <span className="w-8 sm:w-12 h-px bg-[#EAD8CB]/40"></span>
         </div>
@@ -93,12 +98,20 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ weddingData, guestName
         {/* Romantic Invitation Quote / Personalized message */}
         <div className="mt-6 max-w-xl px-4">
           <p className="text-sm sm:text-base text-[#F5EDE6]/95 italic font-serif-title leading-relaxed">
-            {guestName ? (
+            {language === 'ja' ? (
+              guestName ? (
+                <>
+                  &ldquo;{t.hero.personalizedQuotePrefix} <span className="font-semibold text-yellow-200 not-italic">{guestName}</span>{t.hero.personalizedQuoteSuffix}&rdquo;
+                </>
+              ) : (
+                `“${t.hero.defaultQuote}”`
+              )
+            ) : guestName ? (
               <>
                 &ldquo;Đây là lời mời chân thành của chúng em/con gửi tới <span className="font-semibold text-yellow-200 not-italic">{guestName}</span>. Vì một vài lý do mà chúng con chưa thể gửi thiệp tận tay, chúng con rất mong tấm thiệp chân tình này sẽ được đón chào quý khách đến chung vui ngày hạnh phúc nhất của tụi con!&rdquo;
               </>
             ) : (
-              weddingData.sweetQuote
+              weddingData.sweetQuote || t.hero.defaultQuote
             )}
           </p>
         </div>
@@ -109,7 +122,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ weddingData, guestName
             href="#xac-nhan-tham-du"
             className="px-7 py-3 rounded-full text-sm font-semibold tracking-wide bg-[#D48166] text-white hover:bg-[#BF6F55] shadow-lg shadow-[#D48166]/25 transition-all transform hover:-translate-y-0.5 active:translate-y-0"
           >
-            Xác Nhận Tham Dự (RSVP)
+            {t.nav.rsvp}
           </a>
         </div>
 
@@ -119,7 +132,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ weddingData, guestName
           className="mt-12 sm:mt-16 flex flex-col items-center text-white/60 hover:text-white transition-colors group"
           aria-label="Cuộn xuống"
         >
-          <span className="text-xs uppercase tracking-widest mb-1 opacity-75 group-hover:opacity-100">Khám phá</span>
+          <span className="text-xs uppercase tracking-widest mb-1 opacity-75 group-hover:opacity-100">{t.hero.scrollHint}</span>
           <ChevronDown className="w-5 h-5 animate-bounce" />
         </a>
       </div>

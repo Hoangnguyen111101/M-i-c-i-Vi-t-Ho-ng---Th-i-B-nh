@@ -1,12 +1,15 @@
 import React from 'react';
 import { Heart, Calendar } from 'lucide-react';
 import { WeddingData } from '../types';
+import { useLanguage } from '../i18n/LanguageContext';
 
 interface StorySectionProps {
   weddingData: WeddingData;
 }
 
 export const StorySection: React.FC<StorySectionProps> = ({ weddingData }) => {
+  const { t } = useLanguage();
+
   return (
     <section id="chuyen-tinh" className="py-20 sm:py-24 bg-[#FAF7F2] border-t border-[#EDE1D6] relative">
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
@@ -14,13 +17,13 @@ export const StorySection: React.FC<StorySectionProps> = ({ weddingData }) => {
         <div className="text-center max-w-xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white border border-[#E8D6C9] text-[#915442] text-xs font-semibold uppercase tracking-widest mb-3">
             <Heart className="w-3.5 h-3.5 fill-[#D48166] text-[#D48166]" />
-            <span>Hành Trình Yêu Thương</span>
+            <span>{t.story.badge}</span>
           </div>
           <h2 className="font-serif-title text-3xl sm:text-4xl text-[#332620] font-bold">
-            Câu Chuyện Tình Yêu
+            {t.story.title}
           </h2>
           <p className="mt-3 text-[#6E5B4F] text-sm leading-relaxed">
-            Mỗi khoảnh khắc đi qua đều là một mảnh ghép ngọt ngào tạo nên chặng đường hạnh phúc của chúng mình.
+            {t.story.subtitle}
           </p>
         </div>
 

@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { Gift, Copy, Check, QrCode, Heart, Sparkles } from 'lucide-react';
 import { WeddingData, BankAccount } from '../types';
+import { useLanguage } from '../i18n/LanguageContext';
 
 interface GiftBoxSectionProps {
   weddingData: WeddingData;
 }
 
 export const GiftBoxSection: React.FC<GiftBoxSectionProps> = ({ weddingData }) => {
+  const { t } = useLanguage();
   const [copiedBankId, setCopiedBankId] = useState<string | null>(null);
 
   const handleCopyNumber = (account: BankAccount) => {
@@ -29,13 +31,13 @@ export const GiftBoxSection: React.FC<GiftBoxSectionProps> = ({ weddingData }) =
         <div className="text-center max-w-xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#FAF2ED] border border-[#ECD9CC] text-[#915442] text-xs font-semibold uppercase tracking-widest mb-3">
             <Gift className="w-3.5 h-3.5 text-[#B87A65]" />
-            <span>Gửi Gắm Yêu Thương</span>
+            <span>{t.giftBox.badge}</span>
           </div>
           <h2 className="font-serif-title text-3xl sm:text-4xl text-[#332620] font-bold">
-            Hộp Mừng Cưới
+            {t.giftBox.title}
           </h2>
           <p className="mt-3 text-[#6E5B4F] text-sm leading-relaxed">
-            Sự hiện diện của bạn là món quà quý giá nhất đối với chúng mình. Nếu bạn muốn gửi lời chúc mừng từ xa, xin gửi qua thông tin tài khoản dưới đây.
+            {t.giftBox.subtitle}
           </p>
         </div>
 
@@ -56,7 +58,7 @@ export const GiftBoxSection: React.FC<GiftBoxSectionProps> = ({ weddingData }) =
                     isGroom ? 'bg-[#8A4F3D]' : 'bg-[#C8755D]'
                   }`}
                 >
-                  {isGroom ? 'Mừng Chú Rể' : 'Mừng Cô Dâu'}
+                  {isGroom ? t.giftBox.groomBadge : t.giftBox.brideBadge}
                 </div>
 
                 {/* QR Code Container */}
@@ -72,7 +74,7 @@ export const GiftBoxSection: React.FC<GiftBoxSectionProps> = ({ weddingData }) =
                   />
                   <div className="mt-2 text-[11px] text-[#8C7467] font-medium flex items-center justify-center gap-1">
                     <QrCode className="w-3 h-3 text-[#B87A65]" />
-                    <span>Quét mã VietQR chuyển khoản</span>
+                    <span>{t.giftBox.qrHint}</span>
                   </div>
                 </div>
 
@@ -95,7 +97,7 @@ export const GiftBoxSection: React.FC<GiftBoxSectionProps> = ({ weddingData }) =
                         type="button"
                         onClick={() => handleCopyNumber(account)}
                         className="p-1.5 rounded-lg hover:bg-[#FAF4EF] text-[#8A4F3D] transition-colors"
-                        title="Sao chép số tài khoản"
+                        title={t.giftBox.copyAccount}
                       >
                         {copiedBankId === account.id ? (
                           <Check className="w-4 h-4 text-green-600" />
@@ -106,7 +108,7 @@ export const GiftBoxSection: React.FC<GiftBoxSectionProps> = ({ weddingData }) =
                     </div>
                     {copiedBankId === account.id && (
                       <p className="text-xs text-green-600 font-medium mt-1 animate-in fade-in">
-                        Đã sao chép số tài khoản vào bộ nhớ tạm!
+                        {t.giftBox.accountCopied}
                       </p>
                     )}
                   </div>
@@ -120,7 +122,7 @@ export const GiftBoxSection: React.FC<GiftBoxSectionProps> = ({ weddingData }) =
         <div className="mt-12 text-center max-w-lg mx-auto bg-[#FAF4EF] border border-[#ECD9CD] rounded-2xl p-6">
           <Heart className="w-5 h-5 fill-[#D48166] text-[#D48166] mx-auto mb-2" />
           <p className="text-xs sm:text-sm text-[#6E5B4F] leading-relaxed italic">
-            "Dù là món quà hay lời chúc nhỏ nhất, tấm lòng của bạn đều là niềm hạnh phúc vô bờ bến đối với vợ chồng mình trong ngày trọng đại này!"
+            {t.giftBox.thankYouNote}
           </p>
         </div>
       </div>

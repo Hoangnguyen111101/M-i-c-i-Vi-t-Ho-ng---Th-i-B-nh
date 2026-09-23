@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Calendar, Clock, Heart, Plus } from 'lucide-react';
 import { WeddingData } from '../types';
+import { useLanguage } from '../i18n/LanguageContext';
 
 interface CountdownSectionProps {
   weddingData: WeddingData;
@@ -15,6 +16,7 @@ interface TimeLeft {
 }
 
 export const CountdownSection: React.FC<CountdownSectionProps> = ({ weddingData }) => {
+  const { t, language } = useLanguage();
   const [timeLeft, setTimeLeft] = useState<TimeLeft>({
     days: 0,
     hours: 0,
@@ -73,10 +75,10 @@ export const CountdownSection: React.FC<CountdownSectionProps> = ({ weddingData 
   };
 
   const timeCards = [
-    { label: 'Ngày', value: timeLeft.days },
-    { label: 'Giờ', value: timeLeft.hours },
-    { label: 'Phút', value: timeLeft.minutes },
-    { label: 'Giây', value: timeLeft.seconds },
+    { label: t.countdown.days, value: timeLeft.days },
+    { label: t.countdown.hours, value: timeLeft.hours },
+    { label: t.countdown.minutes, value: timeLeft.minutes },
+    { label: t.countdown.seconds, value: timeLeft.seconds },
   ];
 
   return (
@@ -86,12 +88,12 @@ export const CountdownSection: React.FC<CountdownSectionProps> = ({ weddingData 
         <div className="flex items-center justify-center gap-2 mb-3">
           <Clock className="w-4 h-4 text-[#B87A65]" />
           <span className="text-xs uppercase tracking-[0.25em] text-[#8C7063] font-medium">
-            Đếm Ngược Tới Khoảnh Khắc Hạnh Phúc
+            {t.countdown.tagline}
           </span>
         </div>
 
         <h2 className="font-serif-title text-2xl sm:text-3xl text-[#3A2D27] font-bold mb-8">
-          {timeLeft.isPast ? 'Ngày Trọng Đại Đã Diễn Ra!' : 'Cùng Đếm Ngược Ngày Chung Đôi'}
+          {timeLeft.isPast ? t.countdown.titlePast : t.countdown.titleUpcoming}
         </h2>
 
         {/* Timer Grid */}
@@ -120,7 +122,7 @@ export const CountdownSection: React.FC<CountdownSectionProps> = ({ weddingData 
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs sm:text-sm font-medium bg-white text-[#4A3B32] border border-[#D8C5B7] hover:bg-[#F9F4EE] hover:border-[#B87A65] shadow-sm transition-all"
           >
             <Calendar className="w-4 h-4 text-[#B87A65]" />
-            <span>Thêm sự kiện vào Google Calendar</span>
+            <span>{t.countdown.addToCalendar}</span>
           </a>
         </div>
       </div>

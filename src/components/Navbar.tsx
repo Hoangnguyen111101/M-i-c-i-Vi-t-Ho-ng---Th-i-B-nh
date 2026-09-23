@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Heart, Sparkles, Menu, X } from 'lucide-react';
 import { WeddingData } from '../types';
+import { useLanguage, LanguageToggle } from '../i18n/LanguageContext';
 
 interface NavbarProps {
   weddingData: WeddingData;
@@ -13,6 +14,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { t } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,9 +25,9 @@ export const Navbar: React.FC<NavbarProps> = ({
   }, []);
 
   const navLinks = [
-    { name: 'Cặp Đôi', href: '#cap-doi' },
-    { name: 'Lịch Trình', href: '#lich-trinh' },
-    { name: 'Xác Nhận (RSVP)', href: '#xac-nhan-tham-du' },
+    { name: t.nav.couple, href: '#cap-doi' },
+    { name: t.nav.timeline, href: '#lich-trinh' },
+    { name: t.nav.rsvp, href: '#xac-nhan-tham-du' },
   ];
 
   return (
@@ -81,6 +83,12 @@ export const Navbar: React.FC<NavbarProps> = ({
 
         {/* Action Controls for User */}
         <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+          {/* Language Switcher */}
+          <LanguageToggle
+            variant={isScrolled ? 'glass' : 'dark'}
+            className="scale-90 sm:scale-100"
+          />
+
           {/* Replay Door Intro Button */}
           {onReplayDoor && (
             <button
@@ -91,10 +99,10 @@ export const Navbar: React.FC<NavbarProps> = ({
                   ? 'bg-pink-50 text-pink-700 border-pink-200 hover:bg-pink-100'
                   : 'bg-white/20 text-white border-white/40 hover:bg-white/30 backdrop-blur-sm'
               }`}
-              title="Xem lại hiệu ứng mở cánh cửa thiệp cưới"
+              title={t.nav.replayDoor}
             >
               <Sparkles className="w-3.5 h-3.5 text-pink-400 shrink-0" />
-              <span className="whitespace-nowrap">Mở lại thiệp</span>
+              <span className="whitespace-nowrap">{t.nav.replayDoor}</span>
             </button>
           )}
 
@@ -105,7 +113,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             className={`lg:hidden p-1.5 sm:p-2 rounded-lg transition-colors shrink-0 ${
               isScrolled ? 'text-[#4A3D36] hover:bg-black/5' : 'text-white hover:bg-white/10'
             }`}
-            aria-label="Mở menu"
+            aria-label={t.nav.openMenu}
           >
             {mobileMenuOpen ? <X className="w-5 h-5 sm:w-6 sm:h-6" /> : <Menu className="w-5 h-5 sm:w-6 sm:h-6" />}
           </button>
@@ -116,6 +124,11 @@ export const Navbar: React.FC<NavbarProps> = ({
       {mobileMenuOpen && (
         <div className="lg:hidden bg-white/98 backdrop-blur-xl border-b border-[#EFE5DC] px-5 py-6 shadow-xl animate-in fade-in slide-in-from-top-3">
           <div className="flex flex-col space-y-3.5">
+            <div className="flex items-center justify-between pb-3 border-b border-[#FAF3ED]">
+              <span className="text-xs font-medium text-[#7D6B60]">Ngôn ngữ / 言語</span>
+              <LanguageToggle variant="light" />
+            </div>
+
             {navLinks.map((link) => (
               <a
                 key={link.name}
@@ -137,7 +150,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   className="w-full py-2.5 px-4 rounded-xl text-sm font-medium bg-pink-50 text-pink-700 border border-pink-200 flex items-center justify-center gap-2 shadow-sm"
                 >
                   <Sparkles className="w-4 h-4 text-pink-500" />
-                  Xem lại hiệu ứng mở cửa thiệp
+                  {t.nav.replayDoor}
                 </button>
               </div>
             )}

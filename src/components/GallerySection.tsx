@@ -2,12 +2,14 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Camera, X, ChevronLeft, ChevronRight, Maximize2, MoveRight } from 'lucide-react';
 import { WeddingData } from '../types';
 import { normalizeImageUrl } from '../utils/imageHelper';
+import { useLanguage } from '../i18n/LanguageContext';
 
 interface GallerySectionProps {
   weddingData: WeddingData;
 }
 
 export const GallerySection: React.FC<GallerySectionProps> = ({ weddingData }) => {
+  const { t } = useLanguage();
   const [activePhotoIndex, setActivePhotoIndex] = useState<number | null>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
@@ -78,13 +80,13 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ weddingData }) =
           <div className="text-center sm:text-left max-w-xl">
             <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white border border-[#E8D6C9] text-[#915442] text-xs font-semibold uppercase tracking-widest mb-3 shadow-xs">
               <Camera className="w-3.5 h-3.5 text-[#B87A65]" />
-              <span>Khoảnh Khắc Hạnh Phúc</span>
+              <span>{t.gallery.badge}</span>
             </div>
             <h2 className="font-serif-title text-3xl sm:text-4xl text-[#332620] font-bold">
-              Album Ảnh Cưới
+              {t.gallery.title}
             </h2>
             <p className="mt-2 text-[#6E5B4F] text-xs sm:text-sm leading-relaxed">
-              Những thước hình lưu giữ từng nụ cười, cái ôm và tình yêu trọn vẹn của chúng mình.
+              {t.gallery.subtitle}
             </p>
           </div>
 
@@ -95,7 +97,7 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ weddingData }) =
               onClick={slideLeft}
               disabled={!canScrollLeft}
               className="w-10 h-10 rounded-full border border-[#D9C4B5] bg-white text-[#5C4236] flex items-center justify-center hover:bg-[#F3EBE3] transition-all shadow-xs disabled:opacity-30 disabled:cursor-not-allowed active:scale-95"
-              aria-label="Cuộn ảnh sang trái"
+              aria-label={t.gallery.slideLeftAria}
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
@@ -104,7 +106,7 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ weddingData }) =
               onClick={slideRight}
               disabled={!canScrollRight}
               className="w-10 h-10 rounded-full border border-[#D9C4B5] bg-white text-[#5C4236] flex items-center justify-center hover:bg-[#F3EBE3] transition-all shadow-xs disabled:opacity-30 disabled:cursor-not-allowed active:scale-95"
-              aria-label="Cuộn ảnh sang phải"
+              aria-label={t.gallery.slideRightAria}
             >
               <ChevronRight className="w-5 h-5" />
             </button>
@@ -143,7 +145,7 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ weddingData }) =
               <div className="w-full h-full relative overflow-hidden rounded-[14px]">
                 <img
                   src={normalizeImageUrl(photoUrl)}
-                  alt={`Ảnh cưới ${index + 1}`}
+                  alt={t.gallery.photoAlt(index)}
                   className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-out"
                   loading="lazy"
                 />
@@ -155,7 +157,7 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ weddingData }) =
 
                 {/* Overlay on hover / tap */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-between p-4">
-                  <span className="text-white text-xs font-serif-title italic">Bấm để phóng to</span>
+                  <span className="text-white text-xs font-serif-title italic">{t.gallery.viewHint}</span>
                   <span className="p-2 rounded-full bg-white/90 text-[#43302B] shadow-md transform translate-y-1 group-hover:translate-y-0 transition-transform">
                     <Maximize2 className="w-4 h-4" />
                   </span>
@@ -167,7 +169,7 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ weddingData }) =
 
         {/* Mobile Swipe Hint */}
         <div className="flex sm:hidden items-center justify-center gap-1.5 text-xs text-[#8F7668] mt-4 font-medium">
-          <span>Vuốt ngang để xem thêm ảnh</span>
+          <span>{t.gallery.viewHint}</span>
           <MoveRight className="w-4 h-4 animate-pulse text-[#B87A65]" />
         </div>
       </div>
@@ -183,7 +185,7 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ weddingData }) =
             type="button"
             onClick={() => setActivePhotoIndex(null)}
             className="absolute top-5 right-5 text-white/80 hover:text-white p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors z-50"
-            aria-label="Đóng xem ảnh"
+            aria-label={t.gallery.closeLightbox}
           >
             <X className="w-6 h-6" />
           </button>

@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { Calendar, Clock, MapPin, Navigation, Check, Sparkles } from 'lucide-react';
 import { WeddingData, WeddingEvent } from '../types';
+import { useLanguage } from '../i18n/LanguageContext';
 
 interface EventsSectionProps {
   weddingData: WeddingData;
 }
 
 export const EventsSection: React.FC<EventsSectionProps> = ({ weddingData }) => {
+  const { t, language } = useLanguage();
   const [copiedId, setCopiedId] = useState<string | null>(null);
 
   const handleCopyAddress = (event: WeddingEvent) => {
@@ -23,13 +25,13 @@ export const EventsSection: React.FC<EventsSectionProps> = ({ weddingData }) => 
         <div className="text-center max-w-xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#FAF2ED] border border-[#ECD9CC] text-[#915442] text-xs font-semibold uppercase tracking-widest mb-3">
             <Sparkles className="w-3.5 h-3.5 text-[#B87A65]" />
-            <span>Thời Gian &amp; Địa Điểm</span>
+            <span>{t.events.badge}</span>
           </div>
           <h2 className="font-serif-title text-3xl sm:text-4xl text-[#332620] font-bold">
-            Lịch Trình Hôn Lễ
+            {t.events.title}
           </h2>
           <p className="mt-3 text-[#6E5B4F] text-sm leading-relaxed">
-            Sự hiện diện của quý khách là niềm vinh hạnh lớn lao nhất đối với gia đình chúng tôi.
+            {t.events.subtitle}
           </p>
         </div>
 
@@ -43,7 +45,7 @@ export const EventsSection: React.FC<EventsSectionProps> = ({ weddingData }) => 
         >
           {weddingData.events.map((event, index) => {
             const dateObj = new Date(event.date);
-            const formattedDate = dateObj.toLocaleDateString('vi-VN', {
+            const formattedDate = dateObj.toLocaleDateString(language === 'ja' ? 'ja-JP' : 'vi-VN', {
               weekday: 'long',
               year: 'numeric',
               month: 'long',
@@ -52,7 +54,35 @@ export const EventsSection: React.FC<EventsSectionProps> = ({ weddingData }) => 
 
             const isVuQuy = event.title.toLowerCase().includes('vu quy');
             const isThanhHon = event.title.toLowerCase().includes('thành hôn');
-            const badgeLabel = isVuQuy ? 'Nhà Gái' : isThanhHon ? 'Nhà Trai' : 'Hôn Lễ';
+            const badgeLabel = isVuQuy
+              ? t.events.brideHouseBadge
+              : isThanhHon
+              ? t.events.groomHouseBadge
+              : t.events.weddingCeremonyBadge;
+
+            // Retain Vietnamese proper ceremony title while providing polite Japanese subtitle when in Japanese mode
+            const eventTitle =
+              language === 'ja'
+                ? isVuQuy
+                  ? t.events.vuQuySubtitle
+                  : isThanhHon
+                  ? t.events.thanhHonSubtitle
+                  : event.title
+                : event.title;
+
+            const eventNote =
+              language === 'ja'
+                ? isVuQuy
+                  ? t.events.notes.dressCodeVuQuy
+                  : isThanhHon
+                  ? t.events.notes.ritualThanhHon
+                  : event.note
+                : event.note;
+
+            const lunarDisplay =
+              language === 'ja' && event.lunarDate
+                ? event.lunarDate.replace('Ngày', '旧暦').replace('tháng', '月').replace('năm', '年')
+                : event.lunarDate;
 
             return (
               <div
@@ -71,7 +101,7 @@ export const EventsSection: React.FC<EventsSectionProps> = ({ weddingData }) => 
                   </div>
 
                   <h3 className="font-serif-title text-2xl sm:text-3xl text-[#3A2A23] font-bold mb-3">
-                    {event.title}
+                    {eventTitle}
                   </h3>
 
                   {/* Date & Time */}
@@ -88,12 +118,12 @@ export const EventsSection: React.FC<EventsSectionProps> = ({ weddingData }) => 
 
                     {event.lunarDate && (
                       <div className="text-xs text-[#7A665A] italic pl-6.5">
-                        ({event.lunarDate})
+                        ({lunarDisplay})
                       </div>
                     )}
                   </div>
 
-                  {/* Venue Info */}
+                  {/* Venue Info - Vietnamese address and venue are strictly preserved */}
                   <div className="border-t border-[#EAE0D5] pt-4 mb-6 space-y-2">
                     <div className="font-semibold text-base text-[#3A2A23]">
                       {event.venueName}
@@ -102,9 +132,9 @@ export const EventsSection: React.FC<EventsSectionProps> = ({ weddingData }) => 
                       <MapPin className="w-4 h-4 text-[#B87A65] shrink-0 mt-0.5" />
                       <span>{event.address}</span>
                     </div>
-                    {event.note && (
+                    {eventNote && (
                       <div className="text-xs text-[#8A5A48] bg-[#F4E9E0] px-3 py-1.5 rounded-xl mt-2 font-medium">
-                        {event.note}
+                        {eventNote}
                       </div>
                     )}
                   </div>
@@ -119,7 +149,7 @@ export const EventsSection: React.FC<EventsSectionProps> = ({ weddingData }) => 
                     className="w-full py-2.5 px-4 rounded-xl text-xs sm:text-sm font-semibold tracking-wide bg-[#8A4F3D] text-white hover:bg-[#723F30] flex items-center justify-center gap-2 shadow-sm transition-all"
                   >
                     <Navigation className="w-4 h-4" />
-                    <span>Mở Google Maps Chỉ Đường</span>
+                    <span>{t.events.openMap}</span>
                   </a>
 
                   <button
@@ -130,10 +160,10 @@ export const EventsSection: React.FC<EventsSectionProps> = ({ weddingData }) => 
                     {copiedId === event.id ? (
                       <>
                         <Check className="w-3.5 h-3.5 text-green-600" />
-                        <span className="text-green-700 font-medium">Đã sao chép địa chỉ</span>
+                        <span className="text-green-700 font-medium">{t.events.addressCopied}</span>
                       </>
                     ) : (
-                      <span>Sao chép địa chỉ</span>
+                      <span>{t.events.copyAddress}</span>
                     )}
                   </button>
                 </div>

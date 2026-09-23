@@ -3,11 +3,13 @@ import { Sparkles, Heart, Music } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { WeddingData } from '../types';
 import { IllustrationPinkBow } from './IllustrationPinkBow';
+import { useLanguage, LanguageToggle } from '../i18n/LanguageContext';
 
 interface InvitationDoorIntroProps {
   weddingData: WeddingData;
   guestName?: string | null;
   onOpen?: () => void;
+  onUpdateBowImage?: (image: string) => void;
 }
 
 export const InvitationDoorIntro: React.FC<InvitationDoorIntroProps> = ({
@@ -17,6 +19,7 @@ export const InvitationDoorIntro: React.FC<InvitationDoorIntroProps> = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isDismissed, setIsDismissed] = useState(false);
+  const { t } = useLanguage();
 
   const handleOpenDoors = () => {
     if (isOpen) return;
@@ -83,6 +86,15 @@ export const InvitationDoorIntro: React.FC<InvitationDoorIntroProps> = ({
         }`}
       />
 
+      {/* Floating Language Switcher at Top Right of Door */}
+      <div
+        className={`absolute top-4 right-4 sm:top-6 sm:right-6 z-40 transition-opacity duration-500 ${
+          isOpen ? 'opacity-0 pointer-events-none' : 'opacity-100'
+        }`}
+      >
+        <LanguageToggle variant="glass" />
+      </div>
+
       {/* ==================== CÁNH CỬA BÊN TRÁI (LEFT DOOR) ==================== */}
       <div
         className={`absolute top-0 bottom-0 left-0 w-1/2 bg-[#FAF6F0] border-r border-[#E2D1C3] shadow-2xl flex flex-col justify-between p-6 sm:p-12 transition-transform duration-[1300ms] ease-[cubic-bezier(0.77,0,0.175,1)] ${
@@ -113,7 +125,7 @@ export const InvitationDoorIntro: React.FC<InvitationDoorIntroProps> = ({
 
           <div>
             <p className="text-[10px] sm:text-xs uppercase tracking-widest text-[#9C8476] font-medium">
-              Chú Rể
+              {t.door.groomLabel}
             </p>
             <h3 className="font-serif-title text-base sm:text-2xl text-[#3D2C24] font-bold truncate">
               {weddingData.groom.fullName}
@@ -161,7 +173,7 @@ export const InvitationDoorIntro: React.FC<InvitationDoorIntroProps> = ({
 
           <div>
             <p className="text-[10px] sm:text-xs uppercase tracking-widest text-[#9C8476] font-medium">
-              Cô Dâu
+              {t.door.brideLabel}
             </p>
             <h3 className="font-serif-title text-base sm:text-2xl text-[#3D2C24] font-bold truncate">
               {weddingData.bride.fullName}
@@ -206,12 +218,12 @@ export const InvitationDoorIntro: React.FC<InvitationDoorIntroProps> = ({
             </div>
           </div>
 
-          {/* CALL TO ACTION BUTTON (Mở Thiệp - Phong cách ngọt ngào dễ thương) */}
+          {/* CALL TO ACTION BUTTON */}
           <div className="mt-1 sm:mt-2 text-center flex flex-col items-center">
             {guestName && (
               <div className="mb-2.5 px-4 py-1.5 rounded-full bg-white/95 text-[#9E2048] border border-pink-200 shadow-md flex items-center gap-1.5 text-xs sm:text-sm font-medium animate-bounce">
                 <Sparkles className="w-3.5 h-3.5 text-[#EA5B84]" />
-                <span>Thân mời: <strong className="font-serif-title font-bold text-[#BE185D] text-sm sm:text-base">{guestName}</strong></span>
+                <span>{t.door.dearGuest} <strong className="font-serif-title font-bold text-[#BE185D] text-sm sm:text-base">{guestName}</strong></span>
               </div>
             )}
             <button
@@ -219,13 +231,13 @@ export const InvitationDoorIntro: React.FC<InvitationDoorIntroProps> = ({
               className="px-6 py-2.5 sm:px-8 sm:py-3 rounded-full bg-gradient-to-r from-[#EA5B84] via-[#F47293] to-[#BE185D] text-white font-medium text-xs sm:text-sm tracking-wide shadow-[0_10px_25px_rgba(234,91,132,0.45)] hover:shadow-[0_14px_32px_rgba(234,91,132,0.65)] border-2 border-white/80 flex items-center gap-2 transform active:scale-95 transition-all group-hover:scale-105"
             >
               <Heart className="w-4 h-4 fill-white text-white animate-bounce" />
-              <span className="font-bold whitespace-nowrap">Chạm vào nơ để mở thiệp nha 💕</span>
+              <span className="font-bold whitespace-nowrap">{t.door.touchBowToOpen}</span>
               <Sparkles className="w-3.5 h-3.5 text-yellow-200" />
             </button>
 
             <p className="mt-2 text-[11px] sm:text-xs text-[#8A5243] font-semibold flex items-center justify-center gap-1.5 bg-white/85 backdrop-blur-sm px-3.5 py-1 rounded-full border border-[#EADBCE] shadow-xs mx-auto w-fit">
               <Music className="w-3 h-3 text-[#EA5B84]" />
-              <span>Nhạc cưới tự động phát khi mở</span>
+              <span>{t.door.musicNote}</span>
             </p>
           </div>
         </div>

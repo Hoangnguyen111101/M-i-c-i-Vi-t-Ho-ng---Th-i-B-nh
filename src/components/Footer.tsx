@@ -1,6 +1,7 @@
 import React from 'react';
 import { Sparkles, Link as LinkIcon, Settings } from 'lucide-react';
 import { WeddingData } from '../types';
+import { useLanguage } from '../i18n/LanguageContext';
 
 interface FooterProps {
   weddingData: WeddingData;
@@ -15,6 +16,7 @@ export const Footer: React.FC<FooterProps> = ({
   onOpenEditor,
   onReplayDoor,
 }) => {
+  const { t } = useLanguage();
   const weddingYear = new Date(weddingData.weddingDate).getFullYear();
 
   return (
@@ -28,11 +30,11 @@ export const Footer: React.FC<FooterProps> = ({
         </div>
 
         <p className="font-serif-title italic text-sm sm:text-base text-[#D4BEB0] max-w-md mx-auto mb-6">
-          "Cảm ơn bạn đã luôn là một phần đặc biệt trong thanh xuân và ngày hạnh phúc nhất của chúng mình."
+          &ldquo;{t.footer.thankYou}&rdquo;
         </p>
 
         <div className="flex items-center justify-center gap-2 text-xs text-[#9E8779] uppercase tracking-widest mb-8">
-          <span>Hạnh Phúc Vĩnh Cửu</span>
+          <span>{t.footer.tagline}</span>
           <span>•</span>
           <span>{weddingYear}</span>
         </div>
@@ -47,7 +49,7 @@ export const Footer: React.FC<FooterProps> = ({
                 className="text-xs text-[#E05364] hover:text-[#FF8595] flex items-center gap-1.5 transition-colors font-medium"
               >
                 <Sparkles className="w-3.5 h-3.5" />
-                <span>Xem lại hiệu ứng mở cửa thiệp</span>
+                <span>{t.footer.replayDoor}</span>
               </button>
               <span className="text-white/20">•</span>
             </>
@@ -58,10 +60,10 @@ export const Footer: React.FC<FooterProps> = ({
             type="button"
             onClick={onOpenLinkGenerator}
             className="text-xs text-[#EAD8CB]/70 hover:text-white flex items-center gap-1.5 transition-colors bg-white/5 hover:bg-white/10 px-3 py-1.5 rounded-full border border-white/10"
-            title="Tạo link mời riêng có tên từng khách"
+            title={t.footer.createLink}
           >
             <LinkIcon className="w-3.5 h-3.5 text-[#D48166]" />
-            <span className="font-medium">Tạo Link Mời</span>
+            <span className="font-medium">{t.footer.createLink}</span>
           </button>
 
           {onOpenEditor && (
@@ -71,17 +73,17 @@ export const Footer: React.FC<FooterProps> = ({
                 type="button"
                 onClick={onOpenEditor}
                 className="text-xs text-white/40 hover:text-white/70 flex items-center gap-1 transition-colors"
-                title="Sửa nội dung"
+                title={t.footer.settings}
               >
                 <Settings className="w-3 h-3" />
-                <span>Cài đặt</span>
+                <span>{t.footer.settings}</span>
               </button>
             </>
           )}
         </div>
 
         <p className="mt-8 text-[11px] text-[#7A6458]">
-          Trang web thiệp cưới lãng mạn &amp; tinh tế dành riêng cho ngày trọng đại.
+          {t.footer.copyrightNotice}
         </p>
       </div>
     </footer>

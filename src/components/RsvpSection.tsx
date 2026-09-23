@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import confetti from 'canvas-confetti';
 import { UserCheck, Users, Phone, CheckCircle2, XCircle, Download, Eye, EyeOff, Sparkles, Heart } from 'lucide-react';
 import { RsvpEntry, WeddingData } from '../types';
+import { useLanguage } from '../i18n/LanguageContext';
 
 interface RsvpSectionProps {
   weddingData: WeddingData;
@@ -14,6 +15,7 @@ export const RsvpSection: React.FC<RsvpSectionProps> = ({
   rsvpList,
   onAddRsvp,
 }) => {
+  const { t, language } = useLanguage();
   const [fullName, setFullName] = useState('');
   const [phone, setPhone] = useState('');
   const [attending, setAttending] = useState<'yes' | 'no'>('yes');
@@ -69,7 +71,7 @@ export const RsvpSection: React.FC<RsvpSectionProps> = ({
   // Export RSVP list to CSV for the bride and groom
   const handleExportCsv = () => {
     if (rsvpList.length === 0) {
-      alert('Chưa có khách mời nào xác nhận!');
+      alert(t.rsvp.noRsvpYet);
       return;
     }
 
@@ -106,13 +108,13 @@ export const RsvpSection: React.FC<RsvpSectionProps> = ({
         <div className="text-center max-w-xl mx-auto mb-14">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#FAF2ED] border border-[#ECD9CC] text-[#915442] text-xs font-semibold uppercase tracking-widest mb-3">
             <UserCheck className="w-3.5 h-3.5 text-[#B87A65]" />
-            <span>Xác Nhận Tham Dự (RSVP)</span>
+            <span>{t.rsvp.badge}</span>
           </div>
           <h2 className="font-serif-title text-3xl sm:text-4xl text-[#332620] font-bold">
-            Bạn Sẽ Đến Chung Vui Chứ?
+            {t.rsvp.title}
           </h2>
           <p className="mt-3 text-[#6E5B4F] text-sm leading-relaxed">
-            Để giúp cô dâu và chú rể chuẩn bị đón tiếp chu đáo nhất, xin vui lòng gửi phản hồi trước ngày hôn lễ.
+            {t.rsvp.subtitle}
           </p>
         </div>
 
@@ -124,12 +126,12 @@ export const RsvpSection: React.FC<RsvpSectionProps> = ({
                 <CheckCircle2 className="w-8 h-8" />
               </div>
               <h3 className="font-serif-title text-2xl text-[#3A2A23] font-bold">
-                Xác Nhận Thành Công!
+                {t.rsvp.successTitle}
               </h3>
               <p className="text-sm text-[#665449] max-w-md mx-auto leading-relaxed">
                 {attending === 'yes'
-                  ? `Cảm ơn ${fullName}! Vợ chồng mình rất háo hức và mong chờ được đón tiếp bạn trong ngày vui!`
-                  : `Cảm ơn ${fullName} đã phản hồi. Thật tiếc khi bạn không thể tham dự, nhưng chúng mình luôn trân trọng tình cảm của bạn!`}
+                  ? t.rsvp.successYes(fullName)
+                  : t.rsvp.successNo(fullName)}
               </p>
               <div className="pt-4">
                 <button
@@ -137,7 +139,7 @@ export const RsvpSection: React.FC<RsvpSectionProps> = ({
                   onClick={handleResetForm}
                   className="px-6 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider bg-white border border-[#DBC8BB] text-[#705A4D] hover:bg-[#F2E7DC] transition-colors"
                 >
-                  Gửi phản hồi khác
+                  {t.rsvp.sendAnother}
                 </button>
               </div>
             </div>
@@ -146,14 +148,14 @@ export const RsvpSection: React.FC<RsvpSectionProps> = ({
               {/* Full Name */}
               <div>
                 <label className="block text-xs font-semibold uppercase tracking-wider text-[#6B574C] mb-1.5">
-                  Họ và tên của bạn *
+                  {t.rsvp.fullNameLabel}
                 </label>
                 <input
                   type="text"
                   required
                   value={fullName}
                   onChange={(e) => setFullName(e.target.value)}
-                  placeholder="Ví dụ: Nguyễn Văn An"
+                  placeholder={t.rsvp.fullNamePlaceholder}
                   className="w-full px-4 py-3 rounded-xl border border-[#DECBC0] bg-white focus:border-[#8A4F3D] focus:ring-1 focus:ring-[#8A4F3D] outline-none text-sm text-[#3A2A23] transition-all"
                 />
               </div>
@@ -161,14 +163,14 @@ export const RsvpSection: React.FC<RsvpSectionProps> = ({
               {/* Phone Number */}
               <div>
                 <label className="block text-xs font-semibold uppercase tracking-wider text-[#6B574C] mb-1.5">
-                  Số điện thoại
+                  {t.rsvp.phoneLabel}
                 </label>
                 <div className="relative">
                   <input
                     type="tel"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
-                    placeholder="Để chúng mình tiện liên hệ và gửi nhắc lịch..."
+                    placeholder={t.rsvp.phonePlaceholder}
                     className="w-full px-4 py-3 rounded-xl border border-[#DECBC0] bg-white focus:border-[#8A4F3D] focus:ring-1 focus:ring-[#8A4F3D] outline-none text-sm text-[#3A2A23] transition-all"
                   />
                   <Phone className="w-4 h-4 text-[#A89083] absolute right-3.5 top-3.5 pointer-events-none" />
@@ -178,7 +180,7 @@ export const RsvpSection: React.FC<RsvpSectionProps> = ({
               {/* Attendance Choice */}
               <div>
                 <label className="block text-xs font-semibold uppercase tracking-wider text-[#6B574C] mb-2">
-                  Bạn có thể tham dự không? *
+                  {t.rsvp.attendingLabel}
                 </label>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <label
@@ -203,9 +205,9 @@ export const RsvpSection: React.FC<RsvpSectionProps> = ({
                     />
                     <div>
                       <div className="font-semibold text-sm text-[#3A2A23]">
-                        Có, tôi chắc chắn sẽ đến!
+                        {t.rsvp.yesOption}
                       </div>
-                      <div className="text-[11px] text-[#7A6458]">Sẵn sàng nâng ly chúc mừng</div>
+                      <div className="text-[11px] text-[#7A6458]">{t.rsvp.yesSubtext}</div>
                     </div>
                   </label>
 
@@ -231,9 +233,9 @@ export const RsvpSection: React.FC<RsvpSectionProps> = ({
                     />
                     <div>
                       <div className="font-semibold text-sm text-[#3A2A23]">
-                        Rất tiếc, tôi bận mất rồi
+                        {t.rsvp.noOption}
                       </div>
-                      <div className="text-[11px] text-[#7A6458]">Xin gửi lời chúc từ xa</div>
+                      <div className="text-[11px] text-[#7A6458]">{t.rsvp.noSubtext}</div>
                     </div>
                   </label>
                 </div>
@@ -244,7 +246,7 @@ export const RsvpSection: React.FC<RsvpSectionProps> = ({
                   {/* Event Selection */}
                   <div>
                     <label className="block text-xs font-semibold uppercase tracking-wider text-[#6B574C] mb-1.5">
-                      Bạn sẽ tham dự buổi nào? *
+                      {t.rsvp.eventSelectLabel}
                     </label>
                     <select
                       value={attendingEvent}
@@ -256,14 +258,14 @@ export const RsvpSection: React.FC<RsvpSectionProps> = ({
                           {ev.title} ({ev.time} • {ev.venueName})
                         </option>
                       ))}
-                      <option value="Tất cả các buổi">Tất cả các buổi</option>
+                      <option value="Tất cả các buổi">{t.rsvp.allEventsOption}</option>
                     </select>
                   </div>
 
                   {/* Guest Count */}
                   <div>
                     <label className="block text-xs font-semibold uppercase tracking-wider text-[#6B574C] mb-1.5">
-                      Số lượng người tham dự (bao gồm bạn)
+                      {t.rsvp.guestCountLabel}
                     </label>
                     <div className="flex items-center gap-3">
                       {[1, 2, 3, 4, 5].map((num) => (
@@ -277,7 +279,7 @@ export const RsvpSection: React.FC<RsvpSectionProps> = ({
                               : 'bg-white text-[#57443A] border-[#DCC7BA] hover:bg-[#FAF4EE]'
                           }`}
                         >
-                          {num} {num === 1 ? 'người' : 'người'}
+                          {num} {t.rsvp.personSuffix}
                         </button>
                       ))}
                     </div>
@@ -288,13 +290,13 @@ export const RsvpSection: React.FC<RsvpSectionProps> = ({
               {/* Message */}
               <div>
                 <label className="block text-xs font-semibold uppercase tracking-wider text-[#6B574C] mb-1.5">
-                  Lời nhắn gửi hoặc yêu cầu đặc biệt (chay, dị ứng...)
+                  {t.rsvp.messageLabel}
                 </label>
                 <textarea
                   rows={2}
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
-                  placeholder="Ghi chú thêm cho cô dâu và chú rể..."
+                  placeholder={t.rsvp.messagePlaceholder}
                   className="w-full px-4 py-2.5 rounded-xl border border-[#DECBC0] bg-white focus:border-[#8A4F3D] focus:ring-1 focus:ring-[#8A4F3D] outline-none text-sm text-[#3A2A23] resize-none"
                 />
               </div>
@@ -304,7 +306,7 @@ export const RsvpSection: React.FC<RsvpSectionProps> = ({
                 type="submit"
                 className="w-full py-3.5 px-6 rounded-2xl font-semibold text-sm bg-[#8A4F3D] text-white hover:bg-[#723F30] shadow-md shadow-[#8A4F3D]/25 transition-all transform hover:-translate-y-0.5 active:translate-y-0"
               >
-                Gửi Xác Nhận Tham Dự
+                {t.rsvp.submitButton}
               </button>
             </form>
           )}
@@ -318,7 +320,7 @@ export const RsvpSection: React.FC<RsvpSectionProps> = ({
             className="inline-flex items-center gap-2 text-xs font-semibold text-[#8A4F3D] hover:text-[#5E3224] transition-colors"
           >
             {showAdminList ? <EyeOff className="w-3.5 h-3.5" /> : <Eye className="w-3.5 h-3.5" />}
-            <span>Dành cho Cô Dâu &amp; Chú Rể: Xem Thống Kê Khách Mời ({rsvpList.length})</span>
+            <span>{t.rsvp.adminToggle(rsvpList.length)}</span>
           </button>
 
           {showAdminList && (
@@ -326,7 +328,7 @@ export const RsvpSection: React.FC<RsvpSectionProps> = ({
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#E8DDD2]">
                 <div>
                   <h4 className="font-semibold text-base text-[#3A2A23]">
-                    Danh Sách Khách Đã Phản Hồi
+                    {t.rsvp.adminTitle}
                   </h4>
                   <p className="text-xs text-[#7A6458] mt-0.5">
                     Tổng số khách dự kiến tham dự: <strong className="text-[#8A4F3D] font-bold">{totalAttendingGuests}</strong> người
@@ -338,7 +340,7 @@ export const RsvpSection: React.FC<RsvpSectionProps> = ({
                   className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold bg-white border border-[#D5C1B2] text-[#4A3B32] hover:bg-[#F2E7DC] transition-colors shadow-xs"
                 >
                   <Download className="w-4 h-4 text-[#8A4F3D]" />
-                  <span>Xuất file Excel / CSV</span>
+                  <span>{t.rsvp.adminExport}</span>
                 </button>
               </div>
 

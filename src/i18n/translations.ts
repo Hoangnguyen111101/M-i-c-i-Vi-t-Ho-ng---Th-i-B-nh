@@ -226,7 +226,7 @@ export const translations: Record<Language, Translations> = {
       badge: 'Thời Gian & Địa Điểm',
       title: 'Lịch Trình Hôn Lễ',
       subtitle:
-        'Sự hiện diện của quý khách là niềm vinh hạnh lớn lao nhất đối với gia đình chúng tôi.',
+        'Sự hiện diện của quý khách là niềm vinh hạnh đối với gia đình chúng tôi.',
       vuQuySubtitle: 'Lễ Vu Quy (Nhà Gái)',
       thanhHonSubtitle: 'Lễ Thành Hôn (Nhà Trai)',
       groomHouseBadge: 'Nhà Trai',
@@ -237,8 +237,8 @@ export const translations: Record<Language, Translations> = {
       addressCopied: 'Đã sao chép địa chỉ',
       lunarPrefix: 'Âm lịch:',
       notes: {
-        dressCodeVuQuy: 'Trang phục: Tươi sáng, trang trọng',
-        ritualThanhHon: 'Nghi thức gia tiên & Khai tiệc mừng',
+        dressCodeVuQuy: 'Nghi lễ Gia Tiên & Khai tiệc mừng',
+        ritualThanhHon: 'Nghi lễ Rước Dâu & Khai tiệc mừng',
       },
     },
     rsvp: {
@@ -415,8 +415,8 @@ export const translations: Record<Language, Translations> = {
       addressCopied: '住所をコピーしました',
       lunarPrefix: '旧暦:',
       notes: {
-        dressCodeVuQuy: 'ドレスコード: 明るく華やかな正装',
-        ritualThanhHon: '伝統の先祖儀式 ＆ 披露宴・祝宴',
+        dressCodeVuQuy: '伝統の先祖儀式 ＆ 祝宴（披露宴）',
+        ritualThanhHon: '花嫁迎え儀式（迎親） ＆ 祝宴（披露宴）',
       },
     },
     rsvp: {

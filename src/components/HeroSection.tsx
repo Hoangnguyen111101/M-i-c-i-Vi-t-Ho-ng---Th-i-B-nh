@@ -81,19 +81,17 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ weddingData, guestName
           <div className="flex items-center gap-2">
             <Calendar className="w-4 h-4 text-[#D48166]" />
             <span className="font-semibold">
-              {language === 'ja' ? `${year}年 ${month}月 ${day}日` : `${day} • ${month} • ${year}`}
+              {language === 'ja' ? `${year}年 ${month}月 05日・06日` : `05 & 06 • ${month} • ${year}`}
             </span>
           </div>
           <span className="w-8 sm:w-12 h-px bg-[#EAD8CB]/40"></span>
         </div>
 
         {/* Location Hint */}
-        {weddingData.events.length > 0 && (
-          <p className="mt-2 text-xs sm:text-sm text-white/80 flex items-center justify-center gap-1.5 font-light">
-            <MapPin className="w-3.5 h-3.5 text-[#D48166]" />
-            <span>{weddingData.events[weddingData.events.length - 1].venueName}</span>
-          </p>
-        )}
+        <p className="mt-2 text-xs sm:text-sm text-white/90 flex items-center justify-center gap-1.5 font-light">
+          <MapPin className="w-3.5 h-3.5 text-[#D48166] shrink-0" />
+          <span>Tư gia Nhà Gái &amp; Tư gia Nhà Trai</span>
+        </p>
 
         {/* Romantic Invitation Quote / Personalized message */}
         <div className="mt-6 max-w-xl px-4">

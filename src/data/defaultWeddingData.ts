@@ -33,7 +33,7 @@ export const initialWeddingData: WeddingData = {
       venueName: 'Trung Tâm văn hóa Bạch Đằng',
       address: 'Khu Phố Bạch Đằng 2, Phường Tân Uyên, Tp.HCM - Trung tâm văn hóa Bạch Đằng',
       mapUrl: 'https://maps.app.goo.gl/qwrF4fxJ5RpHH69M8',
-      note: 'Trang phục: Tươi sáng, trang trọng',
+      note: 'Nghi lễ Gia Tiên & Khai tiệc mừng',
     },
     {
       id: 'event-2',
@@ -44,7 +44,7 @@ export const initialWeddingData: WeddingData = {
       venueName: 'Tư gia Nhà Trai',
       address: 'ấp An Chu xã Bình Minh Tp. Đồng Nai - Chợ Sông Mây',
       mapUrl: 'https://maps.app.goo.gl/ce89F4huo74br8Us9',
-      note: 'Nghi thức gia tiên & Khai tiệc mừng',
+      note: 'Nghi lễ Rước Dâu & Khai tiệc mừng',
     },
   ],
   loveStories: [],

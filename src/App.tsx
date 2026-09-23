@@ -20,7 +20,7 @@ import { EditorModal } from './components/EditorModal';
 import { LinkGeneratorModal } from './components/LinkGeneratorModal';
 import { InvitationDoorIntro } from './components/InvitationDoorIntro';
 
-const WEDDING_STORAGE_KEY = 'wedding_invitation_data_v13';
+const WEDDING_STORAGE_KEY = 'wedding_invitation_data_v14';
 const WISHES_STORAGE_KEY = 'wedding_guest_wishes_v1';
 const RSVP_STORAGE_KEY = 'wedding_rsvp_entries_v1';
 
@@ -38,7 +38,7 @@ export default function App() {
   // 1. Wedding Data State (persisted to localStorage)
   const [weddingData, setWeddingData] = useState<WeddingData>(() => {
     try {
-      const saved = localStorage.getItem(WEDDING_STORAGE_KEY) || localStorage.getItem('wedding_invitation_data_v12') || localStorage.getItem('wedding_invitation_data_v11');
+      const saved = localStorage.getItem(WEDDING_STORAGE_KEY) || localStorage.getItem('wedding_invitation_data_v13') || localStorage.getItem('wedding_invitation_data_v12') || localStorage.getItem('wedding_invitation_data_v11');
       if (saved) {
         const parsed = JSON.parse(saved);
         // Ensure only 2 ceremonies: Lễ Vu Quy & Lễ Thành Hôn
@@ -48,15 +48,25 @@ export default function App() {
         // Ensure Lễ Vu Quy venue, address, and map link are updated if matching older defaults
         if (parsed.events && Array.isArray(parsed.events)) {
           const vuQuy = parsed.events.find((e: any) => e.id === 'event-1' || e.title === 'Lễ Vu Quy');
-          if (vuQuy && (vuQuy.venueName === 'Tư gia Nhà Gái' || vuQuy.address === 'Trung Tâm văn hóa Bạch Đằng' || vuQuy.address?.includes('Tư gia Nhà Gái') || vuQuy.mapUrl === 'https://maps.google.com/?q=Tu+Gia+Nha+Gai')) {
-            vuQuy.venueName = initialWeddingData.events[0].venueName;
-            vuQuy.address = initialWeddingData.events[0].address;
-            vuQuy.mapUrl = initialWeddingData.events[0].mapUrl;
+          if (vuQuy) {
+            if (vuQuy.venueName === 'Tư gia Nhà Gái' || vuQuy.address === 'Trung Tâm văn hóa Bạch Đằng' || vuQuy.address?.includes('Tư gia Nhà Gái') || vuQuy.mapUrl === 'https://maps.google.com/?q=Tu+Gia+Nha+Gai') {
+              vuQuy.venueName = initialWeddingData.events[0].venueName;
+              vuQuy.address = initialWeddingData.events[0].address;
+              vuQuy.mapUrl = initialWeddingData.events[0].mapUrl;
+            }
+            if (!vuQuy.note || vuQuy.note === 'Trang phục: Tươi sáng, trang trọng' || vuQuy.note === 'Nghi thức gia tiên & Khai tiệc mừng') {
+              vuQuy.note = 'Nghi lễ Gia Tiên & Khai tiệc mừng';
+            }
           }
           const thanhHon = parsed.events.find((e: any) => e.id === 'event-2' || e.title === 'Lễ Thành Hôn');
-          if (thanhHon && (thanhHon.address === 'Tư gia Nhà Trai' || thanhHon.address?.includes('Sẽ cập nhật') || thanhHon.mapUrl === 'https://maps.google.com/?q=Tu+Gia+Nha+Trai')) {
-            thanhHon.address = initialWeddingData.events[1].address;
-            thanhHon.mapUrl = initialWeddingData.events[1].mapUrl;
+          if (thanhHon) {
+            if (thanhHon.address === 'Tư gia Nhà Trai' || thanhHon.address?.includes('Sẽ cập nhật') || thanhHon.mapUrl === 'https://maps.google.com/?q=Tu+Gia+Nha+Trai') {
+              thanhHon.address = initialWeddingData.events[1].address;
+              thanhHon.mapUrl = initialWeddingData.events[1].mapUrl;
+            }
+            if (!thanhHon.note || thanhHon.note === 'Nghi thức gia tiên & Khai tiệc mừng' || thanhHon.note === 'Nghi lễ Rước dâu & Khai tiệc mừng') {
+              thanhHon.note = 'Nghi lễ Rước Dâu & Khai tiệc mừng';
+            }
           }
         }
         // Ensure bride parents are updated to current official names if they match older defaults

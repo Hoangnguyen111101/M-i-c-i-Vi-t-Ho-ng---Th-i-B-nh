@@ -68,10 +68,6 @@ export const CoupleSection: React.FC<CoupleSectionProps> = ({ weddingData }) => 
                 )}
               </div>
             )}
-
-            <p className="text-xs sm:text-sm text-[#615147] italic leading-relaxed max-w-sm">
-              "{weddingData.groom.bio}"
-            </p>
           </div>
 
           {/* Bride Card */}
@@ -109,10 +105,6 @@ export const CoupleSection: React.FC<CoupleSectionProps> = ({ weddingData }) => 
                 )}
               </div>
             )}
-
-            <p className="text-xs sm:text-sm text-[#615147] italic leading-relaxed max-w-sm">
-              "{weddingData.bride.bio}"
-            </p>
           </div>
         </div>
       </div>

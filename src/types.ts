@@ -57,6 +57,7 @@ export interface WeddingData {
   musicTitle: string;
   musicUrl: string;
   musicStartTime?: number;
+  doorBowImage?: string; // Optional custom real photo of the bow (local file or base64 data url)
 }
 
 export interface GuestWish {

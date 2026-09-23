@@ -11,8 +11,6 @@ import { HeroSection } from './components/HeroSection';
 import { CountdownSection } from './components/CountdownSection';
 import { CoupleSection } from './components/CoupleSection';
 import { EventsSection } from './components/EventsSection';
-import { GallerySection } from './components/GallerySection';
-import { GuestbookSection } from './components/GuestbookSection';
 import { RsvpSection } from './components/RsvpSection';
 import { Footer } from './components/Footer';
 import { MusicPlayer } from './components/MusicPlayer';
@@ -72,10 +70,16 @@ export default function App() {
           if (!parsed.bride.origin || parsed.bride.origin === 'Tân Nương') {
             parsed.bride.origin = initialWeddingData.bride.origin;
           }
+          if (parsed.bride.bio === 'Hạnh phúc giản đơn là mỗi ngày được cùng anh chia sẻ những niềm vui bình dị và bước tiếp trên con đường chung đôi.') {
+            parsed.bride.bio = '';
+          }
         }
         if (parsed.groom) {
           if (!parsed.groom.origin || parsed.groom.origin === 'Tân Lang') {
             parsed.groom.origin = initialWeddingData.groom.origin;
+          }
+          if (parsed.groom.bio === 'Mong ước được cùng người mình yêu thương nhất vun đắp một tổ ấm bình yên và trọn vẹn suốt tháng năm dài.') {
+            parsed.groom.bio = '';
           }
         }
         return parsed;
@@ -191,13 +195,22 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#FAF7F2] text-[#2C2825] relative selection:bg-[#E5D2C5] selection:text-[#38281F]">
-      {/* Interactive Double-Door Invitation with Pink Ribbon Bow */}
+      {/* Interactive Double-Door Invitation with Ribbon Bow */}
       {showDoorIntro && (
         <InvitationDoorIntro
           key={doorIntroKey}
           weddingData={weddingData}
           guestName={guestName}
           onOpen={handleOpenDoor}
+          onUpdateBowImage={(newBow) => {
+            const updated = { ...weddingData, doorBowImage: newBow };
+            setWeddingData(updated);
+            try {
+              localStorage.setItem(WEDDING_STORAGE_KEY, JSON.stringify(updated));
+            } catch (err) {
+              console.error(err);
+            }
+          }}
         />
       )}
 
@@ -230,15 +243,6 @@ export default function App() {
 
         {/* Events / Timeline & Map (Lễ Vu Quy & Lễ Thành Hôn) */}
         <EventsSection weddingData={weddingData} />
-
-        {/* Wedding Photo Gallery with Lightbox */}
-        <GallerySection weddingData={weddingData} />
-
-        {/* Guestbook & Wishes */}
-        <GuestbookSection
-          wishes={guestWishes}
-          onAddWish={handleAddWish}
-        />
 
         {/* Attendance RSVP Form */}
         <RsvpSection

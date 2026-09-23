@@ -44,7 +44,7 @@ export const Footer: React.FC<FooterProps> = ({
               <button
                 type="button"
                 onClick={onReplayDoor}
-                className="text-xs text-[#F472B6] hover:text-[#FB7185] flex items-center gap-1.5 transition-colors font-medium"
+                className="text-xs text-[#E05364] hover:text-[#FF8595] flex items-center gap-1.5 transition-colors font-medium"
               >
                 <Sparkles className="w-3.5 h-3.5" />
                 <span>Xem lại hiệu ứng mở cửa thiệp</span>

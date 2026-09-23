@@ -111,12 +111,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ weddingData, guestName
           >
             Xác Nhận Tham Dự (RSVP)
           </a>
-          <a
-            href="#hop-mung-cuoi"
-            className="px-7 py-3 rounded-full text-sm font-semibold tracking-wide bg-white/15 backdrop-blur-md text-white border border-white/30 hover:bg-white/25 transition-all transform hover:-translate-y-0.5 active:translate-y-0"
-          >
-            Hộp Mừng Cưới
-          </a>
         </div>
 
         {/* Scroll down indicator */}

@@ -18,7 +18,7 @@ export const EditorModal: React.FC<EditorModalProps> = ({
   onSave,
   onReset,
 }) => {
-  const [activeTab, setActiveTab] = useState<'couple' | 'date' | 'events' | 'bank' | 'photos'>('couple');
+  const [activeTab, setActiveTab] = useState<'couple' | 'date' | 'events'>('couple');
   const [formData, setFormData] = useState<WeddingData>(JSON.parse(JSON.stringify(data)));
   const [savedNotice, setSavedNotice] = useState(false);
 
@@ -80,8 +80,6 @@ export const EditorModal: React.FC<EditorModalProps> = ({
             { id: 'couple', label: 'Cô Dâu & Chú Rể', icon: User },
             { id: 'date', label: 'Ngày Giờ & Lời Dẫn', icon: Calendar },
             { id: 'events', label: 'Lịch Trình Hôn Lễ', icon: MapPin },
-            { id: 'bank', label: 'Tài Khoản Mừng Cưới', icon: CreditCard },
-            { id: 'photos', label: 'Album Ảnh', icon: Image },
           ].map((tab) => {
             const Icon = tab.icon;
             const isActive = activeTab === tab.id;
@@ -362,6 +360,21 @@ export const EditorModal: React.FC<EditorModalProps> = ({
                     setFormData({ ...formData, invitationMessage: e.target.value })
                   }
                   className="w-full px-3 py-2.5 rounded-xl border border-[#DECBC0] bg-white text-sm text-[#33251F] resize-none"
+                />
+              </div>
+
+              {/* Bow image upload control */}
+              <div className="pt-4 border-t border-[#EDE1D6]">
+                <label className="block text-xs font-semibold text-[#8A4F3D] uppercase mb-1">
+                  Hình ảnh nơ mở đầu (Cánh cửa thiệp)
+                </label>
+                <p className="text-[11px] text-[#7A6458] mb-2">
+                  Tải bức ảnh nơ thật của bạn (.png hoặc .jpg). Hệ thống sẽ tự động hiển thị nơ với nền trong suốt mềm mại trên cánh cửa thiệp.
+                </p>
+                <ImageInputControl
+                  value={formData.doorBowImage || ''}
+                  onChange={(val) => setFormData({ ...formData, doorBowImage: val })}
+                  label="Tải ảnh nơ thật từ máy của bạn"
                 />
               </div>
             </div>

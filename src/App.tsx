@@ -20,7 +20,7 @@ import { EditorModal } from './components/EditorModal';
 import { LinkGeneratorModal } from './components/LinkGeneratorModal';
 import { InvitationDoorIntro } from './components/InvitationDoorIntro';
 
-const WEDDING_STORAGE_KEY = 'wedding_invitation_data_v14';
+const WEDDING_STORAGE_KEY = 'wedding_invitation_data_v17';
 const WISHES_STORAGE_KEY = 'wedding_guest_wishes_v1';
 const RSVP_STORAGE_KEY = 'wedding_rsvp_entries_v1';
 
@@ -38,7 +38,7 @@ export default function App() {
   // 1. Wedding Data State (persisted to localStorage)
   const [weddingData, setWeddingData] = useState<WeddingData>(() => {
     try {
-      const saved = localStorage.getItem(WEDDING_STORAGE_KEY) || localStorage.getItem('wedding_invitation_data_v13') || localStorage.getItem('wedding_invitation_data_v12') || localStorage.getItem('wedding_invitation_data_v11');
+      const saved = localStorage.getItem(WEDDING_STORAGE_KEY) || localStorage.getItem('wedding_invitation_data_v16') || localStorage.getItem('wedding_invitation_data_v15') || localStorage.getItem('wedding_invitation_data_v14') || localStorage.getItem('wedding_invitation_data_v13');
       if (saved) {
         const parsed = JSON.parse(saved);
         // Ensure only 2 ceremonies: Lễ Vu Quy & Lễ Thành Hôn
@@ -67,6 +67,34 @@ export default function App() {
             if (!thanhHon.note || thanhHon.note === 'Nghi thức gia tiên & Khai tiệc mừng' || thanhHon.note === 'Nghi lễ Rước dâu & Khai tiệc mừng') {
               thanhHon.note = 'Nghi lễ Rước Dâu & Khai tiệc mừng';
             }
+          }
+        }
+        // Ensure main hero photo (0923(1)) and studio photos are included
+        const heroPhoto = 'https://lh3.googleusercontent.com/d/1PRTL4depovq7oQTmrjOWOMZlZgDTL73X';
+        const studioThemePhoto = 'https://lh3.googleusercontent.com/d/1VZkunb0zfEu9GsGaeMBFdeZtUOBHcxPT';
+        const brideSoloPhoto = 'https://lh3.googleusercontent.com/d/1ghg61jbGCUWOKq4OP88V5fPtXBNJcOzY';
+        const groomSoloPhoto = 'https://lh3.googleusercontent.com/d/1g7xe4HjIEFC-f05Cs4Rtk8nx6ooOCWGq';
+
+        if (parsed.photos && Array.isArray(parsed.photos)) {
+          // Prepend latest studio photos with 0923(1) as the hero image
+          const otherPhotos = parsed.photos.filter((p: string) => 
+            !p.includes('1PRTL4depovq7oQTmrjOWOMZlZgDTL73X') &&
+            !p.includes('1VZkunb0zfEu9GsGaeMBFdeZtUOBHcxPT') &&
+            !p.includes('1ghg61jbGCUWOKq4OP88V5fPtXBNJcOzY') &&
+            !p.includes('1g7xe4HjIEFC-f05Cs4Rtk8nx6ooOCWGq')
+          );
+          parsed.photos = [heroPhoto, studioThemePhoto, brideSoloPhoto, groomSoloPhoto, ...otherPhotos];
+        }
+
+        // Ensure groom and bride avatars use the new official studio portraits
+        if (parsed.groom) {
+          if (!parsed.groom.avatar || parsed.groom.avatar.includes('1O2RMNGu5v77opnKDRZ8d01-mxBRG-cXz') || parsed.groom.avatar.includes('unsplash')) {
+            parsed.groom.avatar = groomSoloPhoto;
+          }
+        }
+        if (parsed.bride) {
+          if (!parsed.bride.avatar || parsed.bride.avatar.includes('1uq1aH8COHXoMzIrXWhXcfyPcA7ZtwoUu') || parsed.bride.avatar.includes('unsplash')) {
+            parsed.bride.avatar = brideSoloPhoto;
           }
         }
         // Ensure bride parents are updated to current official names if they match older defaults

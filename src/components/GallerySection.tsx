@@ -146,6 +146,7 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ weddingData }) =
                 <img
                   src={normalizeImageUrl(photoUrl)}
                   alt={t.gallery.photoAlt(index)}
+                  referrerPolicy="no-referrer"
                   className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-out"
                   loading="lazy"
                 />
@@ -216,6 +217,7 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ weddingData }) =
             <img
               src={normalizeImageUrl(weddingData.photos[activePhotoIndex])}
               alt={`Ảnh cưới chi tiết ${activePhotoIndex + 1}`}
+              referrerPolicy="no-referrer"
               className="max-w-full max-h-[85vh] object-contain rounded-lg shadow-2xl"
             />
           </div>

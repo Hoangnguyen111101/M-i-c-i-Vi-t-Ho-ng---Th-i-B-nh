@@ -4,7 +4,7 @@ export const initialWeddingData: WeddingData = {
   groom: {
     fullName: 'Nguyễn Việt Hoàng',
     shortName: 'Việt Hoàng',
-    avatar: 'https://lh3.googleusercontent.com/d/1O2RMNGu5v77opnKDRZ8d01-mxBRG-cXz',
+    avatar: 'https://lh3.googleusercontent.com/d/1g7xe4HjIEFC-f05Cs4Rtk8nx6ooOCWGq',
     fatherName: 'Nguyễn Bình Minh',
     motherName: 'Nguyễn Thị Hải Yến',
     origin: 'Đại Hoàng tử',
@@ -13,7 +13,7 @@ export const initialWeddingData: WeddingData = {
   bride: {
     fullName: 'Nguyễn Thị Thái Bình',
     shortName: 'Thái Bình',
-    avatar: 'https://lh3.googleusercontent.com/d/1uq1aH8COHXoMzIrXWhXcfyPcA7ZtwoUu',
+    avatar: 'https://lh3.googleusercontent.com/d/1ghg61jbGCUWOKq4OP88V5fPtXBNJcOzY',
     fatherName: 'Huỳnh Trí Dũng',
     motherName: 'Nguyễn Hoàng Mộng Điệp',
     origin: 'Tiểu công chúa',
@@ -49,9 +49,12 @@ export const initialWeddingData: WeddingData = {
   ],
   loveStories: [],
   photos: [
+    'https://lh3.googleusercontent.com/d/1PRTL4depovq7oQTmrjOWOMZlZgDTL73X',
+    'https://lh3.googleusercontent.com/d/1VZkunb0zfEu9GsGaeMBFdeZtUOBHcxPT',
+    'https://lh3.googleusercontent.com/d/1ghg61jbGCUWOKq4OP88V5fPtXBNJcOzY',
+    'https://lh3.googleusercontent.com/d/1g7xe4HjIEFC-f05Cs4Rtk8nx6ooOCWGq',
     'https://lh3.googleusercontent.com/d/1O2RMNGu5v77opnKDRZ8d01-mxBRG-cXz',
     'https://lh3.googleusercontent.com/d/1uq1aH8COHXoMzIrXWhXcfyPcA7ZtwoUu',
-    'https://lh3.googleusercontent.com/d/1VZkunb0zfEu9GsGaeMBFdeZtUOBHcxPT',
     'https://lh3.googleusercontent.com/d/1uzMyQDte8zs0qo1f02QowW5T6ADAS9zw',
     'https://lh3.googleusercontent.com/d/1hDPGxpDYR0isxEs93_Na4mpUA9cFQgbV',
     'https://lh3.googleusercontent.com/d/1AWkndkG0xDOOqJlei2jlNucw4EhD4d93',

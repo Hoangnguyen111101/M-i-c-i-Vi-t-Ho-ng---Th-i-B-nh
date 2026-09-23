@@ -44,7 +44,8 @@ export const CoupleSection: React.FC<CoupleSectionProps> = ({ weddingData }) => 
                 <img
                   src={normalizeImageUrl(weddingData.groom.avatar)}
                   alt={weddingData.groom.fullName}
-                  className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-500"
+                  referrerPolicy="no-referrer"
+                  className="w-full h-full object-cover object-[center_18%] hover:scale-105 transition-transform duration-500"
                 />
               </div>
               <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-[#8A4F3D] text-white text-xs font-medium tracking-wider uppercase shadow-sm">
@@ -81,7 +82,8 @@ export const CoupleSection: React.FC<CoupleSectionProps> = ({ weddingData }) => 
                 <img
                   src={normalizeImageUrl(weddingData.bride.avatar)}
                   alt={weddingData.bride.fullName}
-                  className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-500"
+                  referrerPolicy="no-referrer"
+                  className="w-full h-full object-cover object-[center_20%] hover:scale-105 transition-transform duration-500"
                 />
               </div>
               <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-[#C8755D] text-white text-xs font-medium tracking-wider uppercase shadow-sm">

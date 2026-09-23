@@ -24,13 +24,14 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ weddingData, guestName
       {/* Background Image with Dark Romantic Vignette */}
       <div className="absolute inset-0 z-0">
         <img
-          src={normalizeImageUrl(weddingData.photos[0]) || 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1600&q=80'}
+          src={normalizeImageUrl(weddingData.photos[0]) || 'https://lh3.googleusercontent.com/d/1PRTL4depovq7oQTmrjOWOMZlZgDTL73X'}
           alt="Wedding Cover"
-          className="w-full h-full object-cover object-center filter brightness-[0.62] contrast-[1.05] scale-105 animate-fade-in"
+          referrerPolicy="no-referrer"
+          className="w-full h-full object-cover object-[center_26%] md:object-[center_28%] filter brightness-[0.72] contrast-[1.05] scale-105 animate-fade-in"
         />
         {/* Soft gradient masks for readability */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#1F1714] via-black/30 to-black/60" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(20,15,13,0.7)_100%)]" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#1F1714] via-black/20 to-black/50" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(20,15,13,0.60)_100%)]" />
       </div>
 
       {/* Decorative Gold Border Frame */}

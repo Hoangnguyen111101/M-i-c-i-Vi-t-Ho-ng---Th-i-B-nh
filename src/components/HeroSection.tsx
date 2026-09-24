@@ -19,19 +19,19 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ weddingData, guestName
   return (
     <section
       id="top"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 pb-16 bg-[#2C211C]"
+      className="relative min-h-screen flex flex-col items-center justify-start pt-[38vh] sm:pt-[40vh] md:justify-end md:pt-24 pb-12 sm:pb-16 bg-[#2C211C] overflow-hidden"
     >
       {/* Background Image with Dark Romantic Vignette */}
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0 overflow-hidden">
         <img
           src={normalizeImageUrl(weddingData.photos[0]) || 'https://lh3.googleusercontent.com/d/1PRTL4depovq7oQTmrjOWOMZlZgDTL73X'}
           alt="Wedding Cover"
           referrerPolicy="no-referrer"
-          className="w-full h-full object-cover object-[center_26%] md:object-[center_28%] filter brightness-[0.72] contrast-[1.05] scale-105 animate-fade-in"
+          className="w-full h-full object-cover object-[center_20%] md:object-[center_16%] filter brightness-[0.78] contrast-[1.05] animate-fade-in"
         />
-        {/* Soft gradient masks for readability */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#1F1714] via-black/20 to-black/50" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(20,15,13,0.60)_100%)]" />
+        {/* Soft gradient masks for readability - lighter on top so faces shine, darker at bottom for text */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#1F1714] via-[#1F1714]/40 to-black/15" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(20,15,13,0.50)_100%)]" />
       </div>
 
       {/* Decorative Gold Border Frame */}
@@ -39,18 +39,18 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ weddingData, guestName
 
       {/* Main Content */}
       <div className="relative z-20 max-w-4xl mx-auto px-4 text-center text-white flex flex-col items-center">
-        {/* Top Tagline */}
-        <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3.5 sm:px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 mb-4 text-[10.5px] sm:text-sm uppercase tracking-wider sm:tracking-[0.25em] text-[#F3DFD2] whitespace-nowrap">
+        {/* Top Tagline - Lowered on mobile to avoid covering faces */}
+        <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3.5 sm:px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 mb-3 sm:mb-4 text-[10.5px] sm:text-sm uppercase tracking-wider sm:tracking-[0.25em] text-[#F3DFD2] whitespace-nowrap shadow-sm">
           <Heart className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-[#D48166] text-[#D48166] shrink-0" />
           <span>{t.hero.tagline}</span>
           <Heart className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-[#D48166] text-[#D48166] shrink-0" />
         </div>
 
-        {/* Personalized Guest Badge / Greeting Banner */}
-        <div className="mb-4 animate-in fade-in slide-in-from-top-2 duration-700">
+        {/* Personalized Guest Badge / Greeting Banner - Lowered on mobile to avoid covering faces */}
+        <div className="mb-3 sm:mb-4 animate-in fade-in slide-in-from-top-2 duration-700">
           {guestName ? (
-            <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-gradient-to-r from-[#D48166]/90 via-[#B86B52]/90 to-[#D48166]/90 backdrop-blur-md border border-[#FADCD1]/50 shadow-xl text-white">
-              <Sparkles className="w-4 h-4 text-yellow-200 animate-pulse" />
+            <div className="inline-flex items-center gap-2 px-4 sm:px-5 py-1.5 sm:py-2 rounded-full bg-gradient-to-r from-[#D48166]/90 via-[#B86B52]/90 to-[#D48166]/90 backdrop-blur-md border border-[#FADCD1]/50 shadow-xl text-white">
+              <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-yellow-200 animate-pulse" />
               <div className="text-xs sm:text-sm tracking-wide">
                 <span className="opacity-90 font-light">{t.hero.invitedPrefix} </span>
                 <span className="font-bold text-yellow-100 font-serif-title text-sm sm:text-base tracking-normal">
@@ -58,21 +58,31 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ weddingData, guestName
                 </span>
                 {language === 'ja' && <span className="opacity-90 font-light"> 様</span>}
               </div>
-              <Sparkles className="w-4 h-4 text-yellow-200 animate-pulse" />
+              <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-yellow-200 animate-pulse" />
             </div>
           ) : (
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-xs text-[#F5EDE6]/90">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-xs text-[#F5EDE6]/90 shadow-sm">
               <span className="italic">{t.hero.generalGreeting}</span>
             </div>
           )}
         </div>
 
-        {/* Couple Names - Responsive layout: column on mobile (<768px) and row on desktop */}
-        <div className="my-3 sm:my-4 max-w-full px-4">
-          <h1 className="flex flex-col md:flex-row items-center justify-center gap-1 sm:gap-2 md:gap-4 font-script text-3xl sm:text-4xl md:text-5xl text-[#FFF6EE] leading-snug sm:leading-normal drop-shadow-md text-center">
-            <span className="text-center">{weddingData.groom.fullName}</span>
-            <span className="text-xl sm:text-2xl md:text-4xl text-[#E8A598] font-normal leading-none my-0.5 md:my-0">&amp;</span>
-            <span className="text-center">{weddingData.bride.fullName}</span>
+        {/* Couple Names - Mobile: Short names on single line (Việt Hoàng & Thái Bình); Desktop: Full names */}
+        {/* Mobile ONLY: "Việt Hoàng & Thái Bình" on a single row */}
+        <div className="my-2 sm:my-3 max-w-full px-2 block md:hidden">
+          <h1 className="font-script text-2xl xs:text-3xl text-[#FFF6EE] leading-normal drop-shadow-md text-center whitespace-nowrap flex items-center justify-center gap-1.5 xs:gap-2">
+            <span>{weddingData.groom.shortName || 'Việt Hoàng'}</span>
+            <span className="text-xl xs:text-2xl text-[#E8A598] font-normal leading-none">&amp;</span>
+            <span>{weddingData.bride.shortName || 'Thái Bình'}</span>
+          </h1>
+        </div>
+
+        {/* Desktop ONLY: Full names on single row */}
+        <div className="my-3 sm:my-4 max-w-full px-4 hidden md:block">
+          <h1 className="flex flex-row items-center justify-center gap-3 lg:gap-4 font-script text-3xl lg:text-5xl text-[#FFF6EE] leading-normal drop-shadow-md text-center">
+            <span>{weddingData.groom.fullName}</span>
+            <span className="text-2xl lg:text-4xl text-[#E8A598] font-normal leading-none">&amp;</span>
+            <span>{weddingData.bride.fullName}</span>
           </h1>
         </div>
 
@@ -95,8 +105,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ weddingData, guestName
         </p>
 
         {/* Romantic Invitation Quote / Personalized message */}
-        <div className="mt-6 max-w-xl px-4">
-          <p className="text-sm sm:text-base text-[#F5EDE6]/95 italic font-serif-title leading-relaxed">
+        <div className="mt-4 sm:mt-6 max-w-xl px-4">
+          <p className="text-xs sm:text-base text-[#F5EDE6]/95 italic font-serif-title leading-relaxed">
             {language === 'ja' ? (
               guestName ? (
                 <>
@@ -116,10 +126,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ weddingData, guestName
         </div>
 
         {/* Action Buttons */}
-        <div className="mt-8 sm:mt-10 flex flex-wrap items-center justify-center gap-4">
+        <div className="mt-6 sm:mt-8 flex flex-wrap items-center justify-center gap-4">
           <a
             href="#xac-nhan-tham-du"
-            className="px-7 py-3 rounded-full text-sm font-semibold tracking-wide bg-[#D48166] text-white hover:bg-[#BF6F55] shadow-lg shadow-[#D48166]/25 transition-all transform hover:-translate-y-0.5 active:translate-y-0"
+            className="px-6 sm:px-7 py-2.5 sm:py-3 rounded-full text-xs sm:text-sm font-semibold tracking-wide bg-[#D48166] text-white hover:bg-[#BF6F55] shadow-lg shadow-[#D48166]/25 transition-all transform hover:-translate-y-0.5 active:translate-y-0"
           >
             {t.nav.rsvp}
           </a>
@@ -128,11 +138,11 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ weddingData, guestName
         {/* Scroll down indicator */}
         <a
           href="#cap-doi"
-          className="mt-12 sm:mt-16 flex flex-col items-center text-white/60 hover:text-white transition-colors group"
+          className="mt-8 sm:mt-12 flex flex-col items-center text-white/60 hover:text-white transition-colors group"
           aria-label="Cuộn xuống"
         >
-          <span className="text-xs uppercase tracking-widest mb-1 opacity-75 group-hover:opacity-100">{t.hero.scrollHint}</span>
-          <ChevronDown className="w-5 h-5 animate-bounce" />
+          <span className="text-[10px] sm:text-xs uppercase tracking-widest mb-1 opacity-75 group-hover:opacity-100">{t.hero.scrollHint}</span>
+          <ChevronDown className="w-4 h-4 sm:w-5 sm:h-5 animate-bounce" />
         </a>
       </div>
     </section>

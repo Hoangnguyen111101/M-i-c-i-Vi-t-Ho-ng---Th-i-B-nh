@@ -106,24 +106,24 @@ export const LanguageToggle: React.FC<LanguageToggleProps> = ({
       <button
         type="button"
         onClick={() => setLanguage('vi')}
-        className={`flex items-center gap-0.5 sm:gap-1 px-1.5 py-0.5 sm:px-2.5 sm:py-1 rounded-full text-[10px] sm:text-xs transition-all active:scale-95 ${getButtonClass(
+        className={`px-1.5 py-0.5 sm:px-2.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-semibold transition-all active:scale-95 ${getButtonClass(
           'vi'
         )}`}
         title="Tiếng Việt"
       >
-        <span className="text-[10px] sm:text-xs hidden xs:inline">🇻🇳</span>
+        <span className="text-[10px] sm:text-xs hidden sm:inline mr-0.5">🇻🇳</span>
         <span>VI</span>
       </button>
 
       <button
         type="button"
         onClick={() => setLanguage('ja')}
-        className={`flex items-center gap-0.5 sm:gap-1 px-1.5 py-0.5 sm:px-2.5 sm:py-1 rounded-full text-[10px] sm:text-xs transition-all active:scale-95 ${getButtonClass(
+        className={`px-1.5 py-0.5 sm:px-2.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-semibold transition-all active:scale-95 ${getButtonClass(
           'ja'
         )}`}
         title="日本語 (Japanese)"
       >
-        <span className="text-[10px] sm:text-xs hidden xs:inline">🇯🇵</span>
+        <span className="text-[10px] sm:text-xs hidden sm:inline mr-0.5">🇯🇵</span>
         <span>JA</span>
       </button>
     </div>

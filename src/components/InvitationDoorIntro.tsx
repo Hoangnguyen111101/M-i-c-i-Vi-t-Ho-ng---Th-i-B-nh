@@ -57,7 +57,12 @@ export const InvitationDoorIntro: React.FC<InvitationDoorIntroProps> = ({
       // ignore
     }
 
-    // 2. Notify parent (e.g. to start playing wedding music)
+    // 2. Notify parent & trigger music playback synchronously within user click gesture
+    try {
+      window.dispatchEvent(new CustomEvent('wedding:play-music'));
+    } catch {
+      // ignore
+    }
     if (onOpen) {
       onOpen();
     }

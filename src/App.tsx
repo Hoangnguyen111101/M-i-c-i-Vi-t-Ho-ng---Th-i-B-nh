@@ -20,7 +20,7 @@ import { EditorModal } from './components/EditorModal';
 import { LinkGeneratorModal } from './components/LinkGeneratorModal';
 import { InvitationDoorIntro } from './components/InvitationDoorIntro';
 
-const WEDDING_STORAGE_KEY = 'wedding_invitation_data_v18';
+const WEDDING_STORAGE_KEY = 'wedding_invitation_data_v19';
 const WISHES_STORAGE_KEY = 'wedding_guest_wishes_v1';
 const RSVP_STORAGE_KEY = 'wedding_rsvp_entries_v1';
 
@@ -38,7 +38,7 @@ export default function App() {
   // 1. Wedding Data State (persisted to localStorage)
   const [weddingData, setWeddingData] = useState<WeddingData>(() => {
     try {
-      const saved = localStorage.getItem(WEDDING_STORAGE_KEY) || localStorage.getItem('wedding_invitation_data_v17') || localStorage.getItem('wedding_invitation_data_v16') || localStorage.getItem('wedding_invitation_data_v15') || localStorage.getItem('wedding_invitation_data_v14') || localStorage.getItem('wedding_invitation_data_v13');
+      const saved = localStorage.getItem(WEDDING_STORAGE_KEY) || localStorage.getItem('wedding_invitation_data_v18') || localStorage.getItem('wedding_invitation_data_v17') || localStorage.getItem('wedding_invitation_data_v16') || localStorage.getItem('wedding_invitation_data_v15') || localStorage.getItem('wedding_invitation_data_v14') || localStorage.getItem('wedding_invitation_data_v13');
       if (saved) {
         const parsed = JSON.parse(saved);
         // Ensure only 2 ceremonies: Lễ Vu Quy & Lễ Thành Hôn
@@ -120,10 +120,10 @@ export default function App() {
             parsed.groom.bio = '';
           }
         }
-        // Ensure seamless background audio and prevent iPhone video popup
-        if (!parsed.musicUrl || parsed.musicUrl.includes('youtube.com') || parsed.musicUrl.includes('youtu.be')) {
-          parsed.musicUrl = '/assets/wedding-music.mp3';
-          parsed.musicStartTime = 0;
+        // Restore default YouTube music URL if previously set to fallback mp3 or missing
+        if (!parsed.musicUrl || parsed.musicUrl === '/assets/wedding-music.mp3') {
+          parsed.musicUrl = initialWeddingData.musicUrl;
+          parsed.musicStartTime = initialWeddingData.musicStartTime ?? 153;
         }
         return parsed;
       }

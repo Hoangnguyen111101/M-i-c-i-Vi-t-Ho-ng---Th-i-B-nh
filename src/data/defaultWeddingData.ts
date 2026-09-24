@@ -66,8 +66,8 @@ export const initialWeddingData: WeddingData = {
   ],
   bankAccounts: [],
   musicTitle: 'Young and Beautiful (Violin Wedding Romance)',
-  musicUrl: '/assets/wedding-music.mp3',
-  musicStartTime: 0,
+  musicUrl: 'https://www.youtube.com/watch?v=PZVRF8bBZms',
+  musicStartTime: 153,
 };
 
 export const initialGuestWishes: GuestWish[] = [

@@ -39,26 +39,26 @@ export const Navbar: React.FC<NavbarProps> = ({
           : 'bg-gradient-to-b from-black/40 via-black/20 to-transparent py-4'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-2.5 sm:px-6 flex items-center justify-between gap-1 sm:gap-4">
         {/* Monogram Logo */}
         <a
           href="#top"
-          className="flex items-center gap-1 xs:gap-1.5 sm:gap-2 group transition-transform active:scale-95 whitespace-nowrap shrink-0"
+          className="flex items-center gap-1 sm:gap-2 group transition-transform active:scale-95 whitespace-nowrap shrink-0 overflow-visible"
         >
           <span
-            className={`font-script text-base xs:text-lg sm:text-2xl md:text-3xl tracking-normal font-normal leading-none transition-colors ${
+            className={`font-script text-[17px] xs:text-xl sm:text-2xl md:text-3xl tracking-normal font-normal leading-none transition-colors shrink-0 ${
               isScrolled ? 'text-[#8A4F3D]' : 'text-white drop-shadow-md'
             }`}
           >
             {weddingData.groom.shortName || 'Việt Hoàng'}
           </span>
           <Heart
-            className={`w-3 h-3 sm:w-3.5 sm:h-3.5 shrink-0 fill-current animate-pulse ${
+            className={`w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 shrink-0 fill-current animate-pulse ${
               isScrolled ? 'text-[#D48166]' : 'text-[#FDE2D8]'
             }`}
           />
           <span
-            className={`font-script text-base xs:text-lg sm:text-2xl md:text-3xl tracking-normal font-normal leading-none transition-colors ${
+            className={`font-script text-[17px] xs:text-xl sm:text-2xl md:text-3xl tracking-normal font-normal leading-none transition-colors shrink-0 ${
               isScrolled ? 'text-[#8A4F3D]' : 'text-white drop-shadow-md'
             }`}
           >
@@ -82,11 +82,10 @@ export const Navbar: React.FC<NavbarProps> = ({
         </nav>
 
         {/* Action Controls for User */}
-        <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+        <div className="flex items-center gap-1 sm:gap-2 shrink-0">
           {/* Language Switcher */}
           <LanguageToggle
             variant={isScrolled ? 'glass' : 'dark'}
-            className="scale-90 sm:scale-100"
           />
 
           {/* Replay Door Intro Button - Compact icon on mobile, full text on sm+ */}
@@ -94,7 +93,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               type="button"
               onClick={onReplayDoor}
-              className={`flex items-center gap-1 sm:gap-1.5 p-1.5 sm:px-3.5 sm:py-1.5 rounded-full text-[11px] sm:text-xs font-semibold tracking-wide transition-all shadow-sm active:scale-95 border shrink-0 ${
+              className={`flex items-center justify-center w-7 h-7 sm:w-auto sm:px-3 sm:py-1 rounded-full text-[11px] sm:text-xs font-semibold tracking-wide transition-all shadow-sm active:scale-95 border shrink-0 ${
                 isScrolled
                   ? 'bg-pink-50 text-pink-700 border-pink-200 hover:bg-pink-100'
                   : 'bg-white/20 text-white border-white/40 hover:bg-white/30 backdrop-blur-sm'
@@ -103,7 +102,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               aria-label={t.nav.replayDoor}
             >
               <Sparkles className="w-3.5 h-3.5 text-pink-400 shrink-0" />
-              <span className="whitespace-nowrap hidden sm:inline">{t.nav.replayDoor}</span>
+              <span className="whitespace-nowrap hidden sm:inline ml-1">{t.nav.replayDoor}</span>
             </button>
           )}
 
@@ -111,12 +110,12 @@ export const Navbar: React.FC<NavbarProps> = ({
           <button
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className={`lg:hidden p-1.5 sm:p-2 rounded-lg transition-colors shrink-0 ${
+            className={`lg:hidden w-7 h-7 sm:w-9 sm:h-9 flex items-center justify-center rounded-lg transition-colors shrink-0 ${
               isScrolled ? 'text-[#4A3D36] hover:bg-black/5' : 'text-white hover:bg-white/10'
             }`}
             aria-label={t.nav.openMenu}
           >
-            {mobileMenuOpen ? <X className="w-5 h-5 sm:w-6 sm:h-6" /> : <Menu className="w-5 h-5 sm:w-6 sm:h-6" />}
+            {mobileMenuOpen ? <X className="w-4 h-4 sm:w-5 sm:h-5" /> : <Menu className="w-4 h-4 sm:w-5 sm:h-5" />}
           </button>
         </div>
       </div>

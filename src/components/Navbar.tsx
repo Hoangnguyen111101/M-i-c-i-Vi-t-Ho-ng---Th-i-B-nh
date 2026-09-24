@@ -43,14 +43,14 @@ export const Navbar: React.FC<NavbarProps> = ({
         {/* Monogram Logo */}
         <a
           href="#top"
-          className="flex items-center gap-1.5 sm:gap-2 group transition-transform active:scale-95 whitespace-nowrap shrink min-w-0"
+          className="flex items-center gap-1 xs:gap-1.5 sm:gap-2 group transition-transform active:scale-95 whitespace-nowrap shrink-0"
         >
           <span
-            className={`font-script text-lg sm:text-2xl md:text-3xl tracking-normal font-normal leading-none transition-colors ${
+            className={`font-script text-base xs:text-lg sm:text-2xl md:text-3xl tracking-normal font-normal leading-none transition-colors ${
               isScrolled ? 'text-[#8A4F3D]' : 'text-white drop-shadow-md'
             }`}
           >
-            {weddingData.groom.shortName}
+            {weddingData.groom.shortName || 'Việt Hoàng'}
           </span>
           <Heart
             className={`w-3 h-3 sm:w-3.5 sm:h-3.5 shrink-0 fill-current animate-pulse ${
@@ -58,11 +58,11 @@ export const Navbar: React.FC<NavbarProps> = ({
             }`}
           />
           <span
-            className={`font-script text-lg sm:text-2xl md:text-3xl tracking-normal font-normal leading-none transition-colors ${
+            className={`font-script text-base xs:text-lg sm:text-2xl md:text-3xl tracking-normal font-normal leading-none transition-colors ${
               isScrolled ? 'text-[#8A4F3D]' : 'text-white drop-shadow-md'
             }`}
           >
-            {weddingData.bride.shortName}
+            {weddingData.bride.shortName || 'Thái Bình'}
           </span>
         </a>
 
@@ -89,20 +89,21 @@ export const Navbar: React.FC<NavbarProps> = ({
             className="scale-90 sm:scale-100"
           />
 
-          {/* Replay Door Intro Button */}
+          {/* Replay Door Intro Button - Compact icon on mobile, full text on sm+ */}
           {onReplayDoor && (
             <button
               type="button"
               onClick={onReplayDoor}
-              className={`flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3.5 py-1.5 rounded-full text-[11px] sm:text-xs font-semibold tracking-wide transition-all shadow-sm active:scale-95 border shrink-0 ${
+              className={`flex items-center gap-1 sm:gap-1.5 p-1.5 sm:px-3.5 sm:py-1.5 rounded-full text-[11px] sm:text-xs font-semibold tracking-wide transition-all shadow-sm active:scale-95 border shrink-0 ${
                 isScrolled
                   ? 'bg-pink-50 text-pink-700 border-pink-200 hover:bg-pink-100'
                   : 'bg-white/20 text-white border-white/40 hover:bg-white/30 backdrop-blur-sm'
               }`}
               title={t.nav.replayDoor}
+              aria-label={t.nav.replayDoor}
             >
               <Sparkles className="w-3.5 h-3.5 text-pink-400 shrink-0" />
-              <span className="whitespace-nowrap">{t.nav.replayDoor}</span>
+              <span className="whitespace-nowrap hidden sm:inline">{t.nav.replayDoor}</span>
             </button>
           )}
 

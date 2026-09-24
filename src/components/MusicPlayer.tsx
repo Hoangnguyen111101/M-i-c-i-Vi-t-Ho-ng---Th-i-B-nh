@@ -42,6 +42,18 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({
 
   const ytVideoId = getYouTubeId(musicUrl);
 
+  // Check if running on iOS (iPhone / iPad / iPod) or iPadOS
+  const isIOS = typeof navigator !== 'undefined' && (
+    /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+    (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
+  );
+
+  // On iOS, YouTube iframe embed triggers native fullscreen video player.
+  // Therefore, on iOS we NEVER use YouTube video player; we ALWAYS use HTML5 <audio> with wedding-music.mp3!
+  const useYouTube = !isIOS && Boolean(ytVideoId);
+  const audioSrc = (!useYouTube && ytVideoId) ? '/assets/wedding-music.mp3' : (musicUrl || '/assets/wedding-music.mp3');
+  const effectiveStartTime = (!useYouTube && ytVideoId) ? 0 : startTime;
+
   const clearFade = () => {
     if (fadeIntervalRef.current) {
       window.clearInterval(fadeIntervalRef.current);
@@ -53,7 +65,7 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({
   const fadeInSound = () => {
     clearFade();
 
-    if (ytVideoId && ytPlayerRef.current) {
+    if (useYouTube && ytPlayerRef.current) {
       try {
         ytPlayerRef.current.setVolume(0);
         let vol = 0;
@@ -100,7 +112,7 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({
   const fadeOutSoundAndPause = () => {
     clearFade();
 
-    if (ytVideoId && ytPlayerRef.current) {
+    if (useYouTube && ytPlayerRef.current) {
       try {
         let vol = ytPlayerRef.current.getVolume?.() ?? 80;
         const step = 6;
@@ -144,9 +156,12 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({
     }
   };
 
-  // Initialize YouTube IFrame API if video ID exists
+  // Initialize YouTube IFrame API ONLY if useYouTube is true
   useEffect(() => {
-    if (!ytVideoId) return;
+    if (!useYouTube || !ytVideoId) {
+      setIsReady(true);
+      return;
+    }
 
     let isSubscribed = true;
 
@@ -256,11 +271,11 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({
         }
       }
     };
-  }, [ytVideoId, startTime]);
+  }, [useYouTube, ytVideoId, startTime]);
 
   // Handle play action with Fade-In
   const playAudio = () => {
-    if (ytVideoId && ytPlayerRef.current && isReady) {
+    if (useYouTube && ytPlayerRef.current && isReady) {
       try {
         const currentTime = ytPlayerRef.current.getCurrentTime?.() ?? 0;
         if (currentTime < startTime - 1) {
@@ -273,8 +288,8 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({
         console.warn('YouTube play failed:', e);
       }
     } else if (audioRef.current) {
-      if (audioRef.current.currentTime < startTime - 1) {
-        audioRef.current.currentTime = startTime;
+      if (audioRef.current.currentTime < effectiveStartTime - 1) {
+        audioRef.current.currentTime = effectiveStartTime;
       }
       audioRef.current.play().then(() => {
         setIsPlaying(true);
@@ -320,32 +335,37 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({
 
   return (
     <div id="wedding-music-player" className="fixed bottom-5 right-5 z-40 flex items-center gap-2">
-      {/* Hidden YouTube player container strictly hidden on mobile and desktop */}
-      <div
-        ref={containerRef}
-        aria-hidden="true"
-        style={{
-          width: 0,
-          height: 0,
-          opacity: 0,
-          pointerEvents: 'none',
-          position: 'absolute',
-          overflow: 'hidden',
-          top: -9999,
-          left: -9999,
-        }}
-      />
+      {/* Hidden YouTube player container ONLY for non-iOS devices when YouTube is explicitly used */}
+      {useYouTube && (
+        <div
+          ref={containerRef}
+          aria-hidden="true"
+          style={{
+            width: 0,
+            height: 0,
+            opacity: 0,
+            pointerEvents: 'none',
+            position: 'absolute',
+            overflow: 'hidden',
+            top: -9999,
+            left: -9999,
+          }}
+        />
+      )}
 
-      {/* Fallback HTML5 audio element if direct audio url */}
-      {!ytVideoId && (
+      {/* HTML5 background audio element: plays pure audio with NO video popup on iPhone */}
+      {!useYouTube && (
         <audio
           ref={audioRef}
-          src={musicUrl}
+          src={audioSrc}
           loop
-          preload="metadata"
+          preload="auto"
+          // @ts-ignore
+          playsInline
+          webkit-playsinline="true"
           onLoadedMetadata={() => {
-            if (audioRef.current && startTime > 0) {
-              audioRef.current.currentTime = startTime;
+            if (audioRef.current && effectiveStartTime > 0) {
+              audioRef.current.currentTime = effectiveStartTime;
             }
           }}
         />

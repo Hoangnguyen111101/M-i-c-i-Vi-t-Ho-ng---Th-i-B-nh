@@ -39,27 +39,27 @@ export const Navbar: React.FC<NavbarProps> = ({
           : 'bg-gradient-to-b from-black/40 via-black/20 to-transparent py-4'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-2.5 sm:px-6 flex items-center justify-between">
-        {/* Left 1/2: Couple's Monogram Name */}
-        <div className="w-1/2 lg:w-auto flex items-center justify-start min-w-0 pr-1">
+      <div className="max-w-7xl mx-auto px-2.5 sm:px-6 flex items-center justify-between gap-1 sm:gap-4">
+        {/* Left: Couple's Monogram Name (Enlarged on Mobile) */}
+        <div className="flex-1 min-w-0 flex items-center justify-start pr-1 overflow-visible">
           <a
             href="#top"
             className="flex items-center gap-1 sm:gap-1.5 group transition-transform active:scale-95 whitespace-nowrap overflow-visible shrink-0"
           >
             <span
-              className={`font-script text-[14px] xs:text-[16px] sm:text-2xl md:text-3xl tracking-normal font-normal leading-none transition-colors shrink-0 ${
+              className={`font-script text-[19px] xs:text-[22px] sm:text-2xl md:text-3xl tracking-normal font-normal leading-none transition-colors shrink-0 ${
                 isScrolled ? 'text-[#8A4F3D]' : 'text-white drop-shadow-md'
               }`}
             >
               {weddingData.groom.shortName || 'Việt Hoàng'}
             </span>
             <Heart
-              className={`w-2 h-2 xs:w-2.5 xs:h-2.5 sm:w-3.5 sm:h-3.5 shrink-0 fill-current animate-pulse ${
+              className={`w-3 h-3 xs:w-3.5 xs:h-3.5 shrink-0 fill-current animate-pulse ${
                 isScrolled ? 'text-[#D48166]' : 'text-[#FDE2D8]'
               }`}
             />
             <span
-              className={`font-script text-[14px] xs:text-[16px] sm:text-2xl md:text-3xl tracking-normal font-normal leading-none transition-colors shrink-0 ${
+              className={`font-script text-[19px] xs:text-[22px] sm:text-2xl md:text-3xl tracking-normal font-normal leading-none transition-colors shrink-0 ${
                 isScrolled ? 'text-[#8A4F3D]' : 'text-white drop-shadow-md'
               }`}
             >
@@ -83,8 +83,8 @@ export const Navbar: React.FC<NavbarProps> = ({
           ))}
         </nav>
 
-        {/* Right 1/2: VN/JA, Đóng thiệp, and Menu */}
-        <div className="w-1/2 lg:w-auto flex items-center justify-end gap-1 xs:gap-1.5 sm:gap-2.5 pl-1 shrink-0">
+        {/* Right: VN/JA, Đóng thiệp, and Menu */}
+        <div className="flex items-center justify-end gap-1 xs:gap-1.5 sm:gap-2.5 pl-1 shrink-0">
           {/* Language Switcher VN / JA */}
           <LanguageToggle
             variant={isScrolled ? 'glass' : 'dark'}
@@ -95,7 +95,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               type="button"
               onClick={onReplayDoor}
-              className={`flex items-center gap-1 px-1.5 py-0.5 sm:px-3 sm:py-1 rounded-full text-[10px] sm:text-xs font-semibold tracking-wide transition-all shadow-sm active:scale-95 border shrink-0 ${
+              className={`flex items-center gap-1 px-2 py-0.5 sm:px-3 sm:py-1 rounded-full text-[10px] sm:text-xs font-semibold tracking-wide transition-all shadow-sm active:scale-95 border shrink-0 ${
                 isScrolled
                   ? 'bg-pink-50 text-pink-700 border-pink-200 hover:bg-pink-100'
                   : 'bg-white/20 text-white border-white/40 hover:bg-white/30 backdrop-blur-sm'

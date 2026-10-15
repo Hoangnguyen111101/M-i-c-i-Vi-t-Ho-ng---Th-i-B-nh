@@ -20,7 +20,7 @@ import { EditorModal } from './components/EditorModal';
 import { LinkGeneratorModal } from './components/LinkGeneratorModal';
 import { InvitationDoorIntro } from './components/InvitationDoorIntro';
 
-const WEDDING_STORAGE_KEY = 'wedding_invitation_data_v19';
+const WEDDING_STORAGE_KEY = 'wedding_invitation_data_v20';
 const WISHES_STORAGE_KEY = 'wedding_guest_wishes_v1';
 const RSVP_STORAGE_KEY = 'wedding_rsvp_entries_v1';
 
@@ -38,7 +38,7 @@ export default function App() {
   // 1. Wedding Data State (persisted to localStorage)
   const [weddingData, setWeddingData] = useState<WeddingData>(() => {
     try {
-      const saved = localStorage.getItem(WEDDING_STORAGE_KEY) || localStorage.getItem('wedding_invitation_data_v18') || localStorage.getItem('wedding_invitation_data_v17') || localStorage.getItem('wedding_invitation_data_v16') || localStorage.getItem('wedding_invitation_data_v15') || localStorage.getItem('wedding_invitation_data_v14') || localStorage.getItem('wedding_invitation_data_v13');
+      const saved = localStorage.getItem(WEDDING_STORAGE_KEY) || localStorage.getItem('wedding_invitation_data_v19') || localStorage.getItem('wedding_invitation_data_v18') || localStorage.getItem('wedding_invitation_data_v17') || localStorage.getItem('wedding_invitation_data_v16') || localStorage.getItem('wedding_invitation_data_v15') || localStorage.getItem('wedding_invitation_data_v14') || localStorage.getItem('wedding_invitation_data_v13');
       if (saved) {
         const parsed = JSON.parse(saved);
         // Ensure only 2 ceremonies: Lễ Vu Quy & Lễ Thành Hôn
@@ -124,6 +124,20 @@ export default function App() {
         if (!parsed.musicUrl || parsed.musicUrl === '/assets/wedding-music.mp3') {
           parsed.musicUrl = initialWeddingData.musicUrl;
           parsed.musicStartTime = initialWeddingData.musicStartTime ?? 153;
+        }
+        // Update sweetQuote if matching old default text
+        if (!parsed.sweetQuote || parsed.sweetQuote.includes('Đây là lời mời chân thành của chúng em/con') || parsed.sweetQuote.includes('vì một vài lý do mà chúng con chưa thể nào mời trực tiếp')) {
+          parsed.sweetQuote = initialWeddingData.sweetQuote;
+        }
+        // Reset hardcoded or outdated bow paths so bundled satin bow asset is always used reliably
+        if (
+          !parsed.doorBowImage ||
+          parsed.doorBowImage.includes('bow-pink') ||
+          parsed.doorBowImage.includes('bow-') ||
+          parsed.doorBowImage.startsWith('/assets/') ||
+          parsed.doorBowImage.startsWith('assets/')
+        ) {
+          parsed.doorBowImage = '';
         }
         return parsed;
       }

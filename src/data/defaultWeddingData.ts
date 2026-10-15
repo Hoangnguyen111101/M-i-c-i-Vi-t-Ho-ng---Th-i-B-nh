@@ -22,7 +22,7 @@ export const initialWeddingData: WeddingData = {
   // Wedding date for countdown (Lễ Thành Hôn: 11:00 ngày 06/12/2026)
   weddingDate: '2026-12-06T11:00:00',
   invitationMessage: 'Hôn nhân là lời hứa của hai trái tim cùng chung nhịp đập, cùng nhau đi qua mọi thăng trầm của cuộc đời. Chúng mình rất mong sự hiện diện của bạn để ngày vui thêm trọn vẹn và ý nghĩa!',
-  sweetQuote: 'Đây là lời mời chân thành của chúng em/con để gửi tới quý anh/chị cô/chú vì một vài lý do mà chúng con chưa thể nào mời trực tiếp, chúng con mong đây là một tấm thiệp chân tình có thể mời quý cô/chú anh/chị đến tiệc chung vui với tụi con.',
+  sweetQuote: 'Vì một vài lý do chưa thể gặp mặt để tự tay trao thiệp, chúng con/ em/ mình xin gửi lời mời trân trọng nhất qua tấm thiệp này. Rất mong cô chú/ anh chị/ bạn sẽ đến dự tiệc và chung vui cùng chúng con/ em/ mình trong ngày trọng đại',
   events: [
     {
       id: 'event-1',
@@ -65,6 +65,7 @@ export const initialWeddingData: WeddingData = {
     'https://lh3.googleusercontent.com/d/1gqu0Kbq2cS700hQW1Xb-v19hWmjsgAD-',
   ],
   bankAccounts: [],
+  doorBowImage: '',
   musicTitle: 'Young and Beautiful (Violin Wedding Romance)',
   musicUrl: 'https://www.youtube.com/watch?v=PZVRF8bBZms',
   musicStartTime: 153,

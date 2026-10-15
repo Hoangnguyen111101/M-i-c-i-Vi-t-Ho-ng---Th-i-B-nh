@@ -180,7 +180,7 @@ export const translations: Record<Language, Translations> = {
       groomLabel: 'Chú Rể',
       brideLabel: 'Cô Dâu',
       dearGuest: 'Thân mời:',
-      touchBowToOpen: 'Chạm vào nơ để mở thiệp nha 💕',
+      touchBowToOpen: 'Chạm vào giữa để mở thiệp nha 💕',
       musicNote: 'Nhạc cưới tự động phát khi mở',
       langSwitchNotice: 'Ngôn ngữ',
     },
@@ -190,11 +190,11 @@ export const translations: Record<Language, Translations> = {
       generalGreeting: 'Kính mời: Quý anh/chị & cô/chú',
       dateSeparator: '•',
       defaultQuote:
-        'Hôn nhân là lời hứa của hai trái tim cùng chung nhịp đập, cùng nhau đi qua mọi thăng trầm của cuộc đời. Chúng mình rất mong sự hiện diện của bạn để ngày vui thêm trọn vẹn và ý nghĩa!',
+        'Vì một vài lý do chưa thể gặp mặt để tự tay trao thiệp, chúng con/ em/ mình xin gửi lời mời trân trọng nhất qua tấm thiệp này. Rất mong cô chú/ anh chị/ bạn sẽ đến dự tiệc và chung vui cùng chúng con/ em/ mình trong ngày trọng đại',
       personalizedQuotePrefix:
-        'Đây là lời mời chân thành của chúng em/con gửi tới',
+        'Vì một vài lý do chưa thể gặp mặt để tự tay trao thiệp, chúng con/ em/ mình xin gửi lời mời trân trọng nhất tới',
       personalizedQuoteSuffix:
-        '. Vì một vài lý do mà chúng con chưa thể gửi thiệp tận tay, chúng con rất mong tấm thiệp chân tình này sẽ được đón chào quý khách đến chung vui ngày hạnh phúc nhất của tụi con!',
+        ' qua tấm thiệp này. Rất mong cô chú/ anh chị/ bạn sẽ đến dự tiệc và chung vui cùng chúng con/ em/ mình trong ngày trọng đại',
       scrollHint: 'Cuộn xuống để xem chi tiết',
     },
     countdown: {
@@ -359,7 +359,7 @@ export const translations: Record<Language, Translations> = {
       groomLabel: '新郎 (Chú Rể)',
       brideLabel: '新婦 (Cô Dâu)',
       dearGuest: 'ご案内:',
-      touchBowToOpen: 'リボンをタップして開く 💕',
+      touchBowToOpen: '中央をタップして開く 💕',
       musicNote: 'タップするとBGMが再生されます',
       langSwitchNotice: '言語 (Language)',
     },

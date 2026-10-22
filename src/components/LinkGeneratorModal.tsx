@@ -46,11 +46,20 @@ export const LinkGeneratorModal: React.FC<LinkGeneratorModalProps> = ({ isOpen, 
     setTimeout(() => setCopiedIndex(null), 2000);
   };
 
+  const [copiedMessageIndex, setCopiedMessageIndex] = useState<number | null>(null);
+
+  const handleCopyMessage = (name: string, url: string, index: number) => {
+    const message = `Thân mời ${name} tham dự lễ cưới của Việt Hoàng & Thái Bình:\n${url}`;
+    navigator.clipboard.writeText(message);
+    setCopiedMessageIndex(index);
+    setTimeout(() => setCopiedMessageIndex(null), 2000);
+  };
+
   const handleCopyAll = () => {
     if (generatedLinks.length === 0) return;
     const textToCopy = generatedLinks
-      .map((item) => `${item.name}: ${item.url}`)
-      .join('\n');
+      .map((item) => `Thân mời ${item.name} tham dự lễ cưới của Việt Hoàng & Thái Bình:\n${item.url}`)
+      .join('\n\n');
     navigator.clipboard.writeText(textToCopy);
     setCopiedAll(true);
     setTimeout(() => setCopiedAll(false), 2000);
@@ -149,7 +158,7 @@ export const LinkGeneratorModal: React.FC<LinkGeneratorModalProps> = ({ isOpen, 
                       </p>
                     </div>
 
-                    <div className="flex items-center gap-1 shrink-0">
+                    <div className="flex flex-wrap items-center gap-1.5 shrink-0">
                       <a
                         href={item.url}
                         target="_blank"
@@ -161,22 +170,45 @@ export const LinkGeneratorModal: React.FC<LinkGeneratorModalProps> = ({ isOpen, 
                       </a>
                       <button
                         type="button"
-                        onClick={() => handleCopyOne(item.url, idx)}
+                        onClick={() => handleCopyMessage(item.name, item.url, idx)}
                         className={`px-2.5 py-1.5 rounded-lg font-medium flex items-center gap-1 transition-all ${
-                          copiedIndex === idx
+                          copiedMessageIndex === idx
                             ? 'bg-green-600 text-white'
                             : 'bg-[#8A4F3D] text-white hover:bg-[#733F30]'
                         }`}
+                        title="Sao chép: Thân mời [Tên] tham dự lễ cưới của Việt Hoàng & Thái Bình"
                       >
-                        {copiedIndex === idx ? (
+                        {copiedMessageIndex === idx ? (
                           <>
                             <Check className="w-3 h-3" />
-                            <span>Đã copy</span>
+                            <span>Đã copy lời mời</span>
                           </>
                         ) : (
                           <>
                             <Copy className="w-3 h-3" />
-                            <span>Copy link</span>
+                            <span>Copy lời mời</span>
+                          </>
+                        )}
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => handleCopyOne(item.url, idx)}
+                        className={`px-2 py-1.5 rounded-lg font-medium border border-[#D9C4B5] flex items-center gap-1 transition-all ${
+                          copiedIndex === idx
+                            ? 'bg-green-100 text-green-800 border-green-500'
+                            : 'bg-white text-[#5A453A] hover:bg-[#F4EDE5]'
+                        }`}
+                        title="Chỉ sao chép đường link"
+                      >
+                        {copiedIndex === idx ? (
+                          <>
+                            <Check className="w-3 h-3 text-green-700" />
+                            <span className="text-green-700">Đã copy link</span>
+                          </>
+                        ) : (
+                          <>
+                            <Copy className="w-3 h-3 text-[#8A4F3D]" />
+                            <span>Link</span>
                           </>
                         )}
                       </button>

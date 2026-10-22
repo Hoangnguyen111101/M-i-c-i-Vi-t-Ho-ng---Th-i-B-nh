@@ -25,16 +25,17 @@ const WISHES_STORAGE_KEY = 'wedding_guest_wishes_v1';
 const RSVP_STORAGE_KEY = 'wedding_rsvp_entries_v1';
 
 export default function App() {
-  // Read ?to= from URL parameter for personalized guest invitation
+  // Read ?to= or ?guest= from URL parameter for personalized guest invitation
   const [guestName, setGuestName] = useState<string | null>(() => {
     try {
       const params = new URLSearchParams(window.location.search);
-      const toParam = params.get('to');
+      const toParam = params.get('to') || params.get('guest');
       return toParam ? toParam.trim() : null;
     } catch {
       return null;
     }
   });
+
   // 1. Wedding Data State (persisted to localStorage)
   const [weddingData, setWeddingData] = useState<WeddingData>(() => {
     try {
@@ -178,6 +179,23 @@ export default function App() {
   const [showDoorIntro, setShowDoorIntro] = useState(true);
   const [doorIntroKey, setDoorIntroKey] = useState(1);
   const [musicAutoPlayTrigger, setMusicAutoPlayTrigger] = useState(false);
+
+  // Dynamically update document title and social preview tags
+  useEffect(() => {
+    const groom = weddingData?.groom?.shortName || 'Việt Hoàng';
+    const bride = weddingData?.bride?.shortName || 'Thái Bình';
+    const titleText = guestName
+      ? `Thân mời ${guestName} tham dự lễ cưới của ${groom} & ${bride}`
+      : `Thân mời tham dự lễ cưới của ${groom} & ${bride}`;
+
+    document.title = titleText;
+
+    const ogTitle = document.querySelector('meta[property="og:title"]');
+    if (ogTitle) ogTitle.setAttribute('content', titleText);
+
+    const twTitle = document.querySelector('meta[name="twitter:title"]');
+    if (twTitle) twTitle.setAttribute('content', titleText);
+  }, [guestName, weddingData?.groom?.shortName, weddingData?.bride?.shortName]);
 
   // Sync to localStorage
   useEffect(() => {

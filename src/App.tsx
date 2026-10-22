@@ -185,8 +185,8 @@ export default function App() {
     const groom = weddingData?.groom?.shortName || 'Việt Hoàng';
     const bride = weddingData?.bride?.shortName || 'Thái Bình';
     const titleText = guestName
-      ? `Thân mời ${guestName} tham dự lễ cưới của ${groom} & ${bride}`
-      : `Thân mời tham dự lễ cưới của ${groom} & ${bride}`;
+      ? `Thân mời ${guestName} tham dự đám cưới của ${groom} & ${bride}`
+      : `Thân mời tham dự đám cưới của ${groom} & ${bride}`;
 
     document.title = titleText;
 
@@ -261,6 +261,8 @@ export default function App() {
   // Handle replaying the door opening effect
   const handleReplayDoor = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    setMusicAutoPlayTrigger(false);
+    window.dispatchEvent(new CustomEvent('wedding:pause-music'));
     setShowDoorIntro(false);
     setTimeout(() => {
       setDoorIntroKey((prev) => prev + 1);
@@ -277,15 +279,6 @@ export default function App() {
           weddingData={weddingData}
           guestName={guestName}
           onOpen={handleOpenDoor}
-          onUpdateBowImage={(newBow) => {
-            const updated = { ...weddingData, doorBowImage: newBow };
-            setWeddingData(updated);
-            try {
-              localStorage.setItem(WEDDING_STORAGE_KEY, JSON.stringify(updated));
-            } catch (err) {
-              console.error(err);
-            }
-          }}
         />
       )}
 

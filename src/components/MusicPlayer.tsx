@@ -329,20 +329,14 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({
     return () => window.removeEventListener('wedding:play-music', handleDoorOpened);
   }, [isReady]);
 
-  // First interaction auto-play fallback
+  // Listen for pause trigger (e.g. when replaying door intro)
   useEffect(() => {
-    const handleFirstClick = () => {
-      if (!hasInteracted) {
-        setHasInteracted(true);
-        playAudio();
-      }
+    const handlePause = () => {
+      fadeOutSoundAndPause();
     };
-
-    window.addEventListener('click', handleFirstClick, { once: true });
-    return () => {
-      window.removeEventListener('click', handleFirstClick);
-    };
-  }, [hasInteracted, isReady]);
+    window.addEventListener('wedding:pause-music', handlePause);
+    return () => window.removeEventListener('wedding:pause-music', handlePause);
+  }, []);
 
   const togglePlay = (e: React.MouseEvent) => {
     e.stopPropagation();

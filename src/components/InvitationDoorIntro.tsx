@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Sparkles, Heart, Music, Image as ImageIcon } from 'lucide-react';
+import { Sparkles, Heart, Music } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { WeddingData } from '../types';
 import bowIvoryPng from '../assets/bow-ivory.png';
@@ -132,20 +132,14 @@ export const InvitationDoorIntro: React.FC<InvitationDoorIntroProps> = ({
           <div className="absolute inset-1 border border-[#EADBCE] rounded-l-xl" />
         </div>
 
-        {/* Outer content on Left Door: Groom Initial Crest (Đưa hẳn ra phía ngoài bên trái để không bị nơ che) */}
-        <div className="relative z-10 flex flex-col items-start text-left pl-3 xs:pl-6 sm:pl-10 md:pl-14 lg:pl-18 pr-1 sm:pr-24 lg:pr-32 my-auto space-y-2 xs:space-y-3 max-w-[92%] sm:max-w-[76%]">
-          {/* Circular Gold Crest with Groom's Short Name */}
-          <div className="self-start inline-flex items-center justify-center w-14 h-14 xs:w-16 xs:h-16 sm:w-22 sm:h-22 md:w-24 md:h-24 rounded-full border-2 border-[#CBB3A2] bg-[#F4EDE5] shadow-inner transition-transform hover:scale-105">
-            <span className="font-script text-2xl xs:text-3xl sm:text-4xl md:text-5xl text-[#7E4B3D] font-normal leading-none">
-              {weddingData.groom.shortName || 'CR'}
-            </span>
-          </div>
-
-          <div>
-            <p className="font-serif-title text-[9.5px] xs:text-[11px] sm:text-xs uppercase tracking-[0.25em] text-[#9C8476] font-semibold text-left">
-              {t.door.groomLabel}
-            </p>
-          </div>
+        {/* Outer content on Left Door: Groom Name (Đưa hẳn ra phía ngoài bên trái để không bị nơ che) */}
+        <div className="relative z-10 flex flex-col items-start text-left pl-3 xs:pl-5 sm:pl-10 md:pl-14 lg:pl-18 pr-0.5 sm:pr-16 my-auto space-y-0.5 sm:space-y-1 w-full overflow-visible">
+          <p className="font-serif-title text-[9px] xs:text-[10px] sm:text-xs uppercase tracking-[0.25em] text-[#9C8476] font-semibold text-left whitespace-nowrap">
+            {t.door.groomLabel}
+          </p>
+          <span className="font-script text-[22px] xs:text-[26px] sm:text-4xl md:text-5xl lg:text-6xl text-[#7E4B3D] font-normal leading-none text-left drop-shadow-xs whitespace-nowrap">
+            {weddingData.groom.shortName || 'Việt Hoàng'}
+          </span>
         </div>
 
       </div>
@@ -169,20 +163,14 @@ export const InvitationDoorIntro: React.FC<InvitationDoorIntroProps> = ({
           <div className="absolute inset-1 border border-[#EADBCE] rounded-r-xl" />
         </div>
 
-        {/* Outer content on Right Door: Bride Initial Crest (Đưa hẳn ra phía ngoài bên phải để không bị nơ che) */}
-        <div className="relative z-10 flex flex-col items-end text-right pr-3 xs:pr-6 sm:pr-10 md:pr-14 lg:pr-18 pl-1 sm:pl-24 lg:pl-32 my-auto space-y-2 xs:space-y-3 max-w-[92%] sm:max-w-[76%] self-end">
-          {/* Circular Gold Crest with Bride's Short Name */}
-          <div className="self-end inline-flex items-center justify-center w-14 h-14 xs:w-16 xs:h-16 sm:w-22 sm:h-22 md:w-24 md:h-24 rounded-full border-2 border-[#CBB3A2] bg-[#F4EDE5] shadow-inner transition-transform hover:scale-105">
-            <span className="font-script text-2xl xs:text-3xl sm:text-4xl md:text-5xl text-[#7E4B3D] font-normal leading-none">
-              {weddingData.bride.shortName || 'CD'}
-            </span>
-          </div>
-
-          <div>
-            <p className="font-serif-title text-[9.5px] xs:text-[11px] sm:text-xs uppercase tracking-[0.25em] text-[#9C8476] font-semibold text-right">
-              {t.door.brideLabel}
-            </p>
-          </div>
+        {/* Outer content on Right Door: Bride Name (Đưa hẳn ra phía ngoài bên phải để không bị nơ che) */}
+        <div className="relative z-10 flex flex-col items-end text-right pr-3 xs:pr-5 sm:pr-10 md:pr-14 lg:pr-18 pl-0.5 sm:pl-16 my-auto space-y-0.5 sm:space-y-1 w-full overflow-visible self-end">
+          <p className="font-serif-title text-[9px] xs:text-[10px] sm:text-xs uppercase tracking-[0.25em] text-[#9C8476] font-semibold text-right whitespace-nowrap">
+            {t.door.brideLabel}
+          </p>
+          <span className="font-script text-[22px] xs:text-[26px] sm:text-4xl md:text-5xl lg:text-6xl text-[#7E4B3D] font-normal leading-none text-right drop-shadow-xs whitespace-nowrap">
+            {weddingData.bride.shortName || 'Thái Bình'}
+          </span>
         </div>
 
       </div>
@@ -234,34 +222,6 @@ export const InvitationDoorIntro: React.FC<InvitationDoorIntroProps> = ({
               <Music className="w-3 h-3 text-[#B87A65]" />
               <span>{t.door.musicNote}</span>
             </p>
-
-            {onUpdateBowImage && (
-              <label
-                onClick={(e) => e.stopPropagation()}
-                className="mt-2 text-[10px] sm:text-[11px] text-[#8C6D5B] hover:text-[#5B392B] cursor-pointer flex items-center justify-center gap-1 opacity-75 hover:opacity-100 transition-opacity bg-white/70 hover:bg-white px-2.5 py-0.5 rounded-full border border-[#DFD0BF] mx-auto w-fit"
-                title="Tải ảnh nơ thật của bạn (.png hoặc .jpg)"
-              >
-                <ImageIcon className="w-3 h-3 text-[#A8725E]" />
-                <span>Đổi ảnh nơ khác</span>
-                <input
-                  type="file"
-                  accept="image/*"
-                  className="hidden"
-                  onChange={(e) => {
-                    const file = e.target.files?.[0];
-                    if (file) {
-                      const reader = new FileReader();
-                      reader.onload = () => {
-                        if (typeof reader.result === 'string') {
-                          onUpdateBowImage(reader.result);
-                        }
-                      };
-                      reader.readAsDataURL(file);
-                    }
-                  }}
-                />
-              </label>
-            )}
           </div>
         </div>
       </div>

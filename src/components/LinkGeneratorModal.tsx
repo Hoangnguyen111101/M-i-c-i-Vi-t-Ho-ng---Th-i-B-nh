@@ -84,7 +84,7 @@ export const LinkGeneratorModal: React.FC<LinkGeneratorModalProps> = ({
   };
 
   const handleCopyMessage = (name: string, url: string, index: number) => {
-    const message = `Thân mời ${name} tham dự lễ cưới của ${groomName} & ${brideName}:\n${url}`;
+    const message = `Thân mời ${name} tham dự đám cưới của ${groomName} & ${brideName}:\n${url}`;
     safeCopy(message).then(() => {
       setCopiedMessageIndex(index);
       setTimeout(() => setCopiedMessageIndex(null), 2000);
@@ -94,7 +94,7 @@ export const LinkGeneratorModal: React.FC<LinkGeneratorModalProps> = ({
   const handleCopyAll = () => {
     if (generatedLinks.length === 0) return;
     const textToCopy = generatedLinks
-      .map((item) => `Thân mời ${item.name} tham dự lễ cưới của ${groomName} & ${brideName}:\n${item.url}`)
+      .map((item) => `Thân mời ${item.name} tham dự đám cưới của ${groomName} & ${brideName}:\n${item.url}`)
       .join('\n\n');
     safeCopy(textToCopy).then(() => {
       setCopiedAll(true);

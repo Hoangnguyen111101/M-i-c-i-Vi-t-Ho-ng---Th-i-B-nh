@@ -339,6 +339,8 @@ export default function App() {
       <LinkGeneratorModal
         isOpen={isLinkGenOpen}
         onClose={() => setIsLinkGenOpen(false)}
+        groomName={weddingData?.groom?.shortName || 'Việt Hoàng'}
+        brideName={weddingData?.bride?.shortName || 'Thái Bình'}
       />
 
       {/* Senior Dev Guidance Modal for Beginners */}

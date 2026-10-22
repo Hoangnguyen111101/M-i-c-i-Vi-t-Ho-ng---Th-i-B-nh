@@ -4,6 +4,8 @@ import { X, Link as LinkIcon, Copy, Check, Sparkles, ExternalLink } from 'lucide
 interface LinkGeneratorModalProps {
   isOpen: boolean;
   onClose: () => void;
+  groomName?: string;
+  brideName?: string;
 }
 
 interface GeneratedItem {
@@ -11,11 +13,45 @@ interface GeneratedItem {
   url: string;
 }
 
-export const LinkGeneratorModal: React.FC<LinkGeneratorModalProps> = ({ isOpen, onClose }) => {
+export const LinkGeneratorModal: React.FC<LinkGeneratorModalProps> = ({
+  isOpen,
+  onClose,
+  groomName = 'Việt Hoàng',
+  brideName = 'Thái Bình',
+}) => {
+  // ALL HOOKS MUST BE DECLARED AT THE VERY TOP BEFORE ANY CONDITIONAL RETURN
   const [namesInput, setNamesInput] = useState('');
   const [generatedLinks, setGeneratedLinks] = useState<GeneratedItem[]>([]);
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
+  const [copiedMessageIndex, setCopiedMessageIndex] = useState<number | null>(null);
   const [copiedAll, setCopiedAll] = useState(false);
+
+  // Clipboard copy helper with fallback for iframe environments
+  const safeCopy = (text: string): Promise<boolean> => {
+    if (navigator?.clipboard?.writeText) {
+      return navigator.clipboard.writeText(text).then(() => true).catch(() => {
+        return fallbackCopy(text);
+      });
+    }
+    return Promise.resolve(fallbackCopy(text));
+  };
+
+  const fallbackCopy = (text: string): boolean => {
+    try {
+      const textArea = document.createElement('textarea');
+      textArea.value = text;
+      textArea.style.position = 'fixed';
+      textArea.style.left = '-9999px';
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      const successful = document.execCommand('copy');
+      document.body.removeChild(textArea);
+      return successful;
+    } catch {
+      return false;
+    }
+  };
 
   if (!isOpen) return null;
 
@@ -41,28 +77,29 @@ export const LinkGeneratorModal: React.FC<LinkGeneratorModalProps> = ({ isOpen, 
   };
 
   const handleCopyOne = (url: string, index: number) => {
-    navigator.clipboard.writeText(url);
-    setCopiedIndex(index);
-    setTimeout(() => setCopiedIndex(null), 2000);
+    safeCopy(url).then(() => {
+      setCopiedIndex(index);
+      setTimeout(() => setCopiedIndex(null), 2000);
+    });
   };
 
-  const [copiedMessageIndex, setCopiedMessageIndex] = useState<number | null>(null);
-
   const handleCopyMessage = (name: string, url: string, index: number) => {
-    const message = `Thân mời ${name} tham dự lễ cưới của Việt Hoàng & Thái Bình:\n${url}`;
-    navigator.clipboard.writeText(message);
-    setCopiedMessageIndex(index);
-    setTimeout(() => setCopiedMessageIndex(null), 2000);
+    const message = `Thân mời ${name} tham dự lễ cưới của ${groomName} & ${brideName}:\n${url}`;
+    safeCopy(message).then(() => {
+      setCopiedMessageIndex(index);
+      setTimeout(() => setCopiedMessageIndex(null), 2000);
+    });
   };
 
   const handleCopyAll = () => {
     if (generatedLinks.length === 0) return;
     const textToCopy = generatedLinks
-      .map((item) => `Thân mời ${item.name} tham dự lễ cưới của Việt Hoàng & Thái Bình:\n${item.url}`)
+      .map((item) => `Thân mời ${item.name} tham dự lễ cưới của ${groomName} & ${brideName}:\n${item.url}`)
       .join('\n\n');
-    navigator.clipboard.writeText(textToCopy);
-    setCopiedAll(true);
-    setTimeout(() => setCopiedAll(false), 2000);
+    safeCopy(textToCopy).then(() => {
+      setCopiedAll(true);
+      setTimeout(() => setCopiedAll(false), 2000);
+    });
   };
 
   return (

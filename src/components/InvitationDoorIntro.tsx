@@ -115,7 +115,7 @@ export const InvitationDoorIntro: React.FC<InvitationDoorIntroProps> = ({
 
       {/* ==================== CÁNH CỬA BÊN TRÁI (LEFT DOOR) ==================== */}
       <div
-        className={`absolute top-0 bottom-0 left-0 w-1/2 bg-[#FAF7F2] border-r border-[#E2D1C3] shadow-2xl flex flex-col justify-between p-6 sm:p-12 transition-transform duration-[1300ms] ease-[cubic-bezier(0.77,0,0.175,1)] ${
+        className={`absolute top-0 bottom-0 left-0 w-1/2 bg-[#FAF7F2] border-r border-[#E2D1C3] shadow-2xl flex flex-col justify-between p-4 xs:p-6 sm:p-12 transition-transform duration-[1300ms] ease-[cubic-bezier(0.77,0,0.175,1)] ${
           isOpen ? '-translate-x-full' : 'translate-x-0'
         }`}
         style={{
@@ -128,26 +128,23 @@ export const InvitationDoorIntro: React.FC<InvitationDoorIntroProps> = ({
         <div className="absolute inset-0 bg-[radial-gradient(#E8DACF_1px,transparent_1px)] [background-size:16px_16px] opacity-35 pointer-events-none" />
 
         {/* Outer decorative golden border */}
-        <div className="absolute inset-4 sm:inset-8 border-2 border-[#D9C4B5] pointer-events-none rounded-l-2xl">
+        <div className="absolute inset-3 sm:inset-8 border-2 border-[#D9C4B5] pointer-events-none rounded-l-2xl">
           <div className="absolute inset-1 border border-[#EADBCE] rounded-l-xl" />
         </div>
 
-        {/* Center content on Left Door: Groom Initial Crest */}
-        <div className="relative z-10 text-center sm:text-right sm:pr-8 space-y-3 my-auto">
+        {/* Outer content on Left Door: Groom Initial Crest (Đưa hẳn ra phía ngoài bên trái để không bị nơ che) */}
+        <div className="relative z-10 flex flex-col items-start text-left pl-3 xs:pl-6 sm:pl-10 md:pl-14 lg:pl-18 pr-1 sm:pr-24 lg:pr-32 my-auto space-y-2 xs:space-y-3 max-w-[92%] sm:max-w-[76%]">
           {/* Circular Gold Crest with Groom's Short Name */}
-          <div className="inline-flex items-center justify-center w-16 h-16 sm:w-24 sm:h-24 rounded-full border-2 border-[#CBB3A2] bg-[#F4EDE5] shadow-inner">
-            <span className="font-script text-3xl sm:text-5xl text-[#7E4B3D] font-bold">
+          <div className="self-start inline-flex items-center justify-center w-14 h-14 xs:w-16 xs:h-16 sm:w-22 sm:h-22 md:w-24 md:h-24 rounded-full border-2 border-[#CBB3A2] bg-[#F4EDE5] shadow-inner transition-transform hover:scale-105">
+            <span className="font-script text-2xl xs:text-3xl sm:text-4xl md:text-5xl text-[#7E4B3D] font-normal leading-none">
               {weddingData.groom.shortName || 'CR'}
             </span>
           </div>
 
           <div>
-            <p className="text-[10px] sm:text-xs uppercase tracking-widest text-[#9C8476] font-medium">
+            <p className="font-serif-title text-[9.5px] xs:text-[11px] sm:text-xs uppercase tracking-[0.25em] text-[#9C8476] font-semibold text-left">
               {t.door.groomLabel}
             </p>
-            <h3 className="font-serif-title text-base sm:text-2xl text-[#3D2C24] font-bold truncate">
-              {weddingData.groom.fullName}
-            </h3>
           </div>
         </div>
 
@@ -155,7 +152,7 @@ export const InvitationDoorIntro: React.FC<InvitationDoorIntroProps> = ({
 
       {/* ==================== CÁNH CỬA BÊN PHẢI (RIGHT DOOR) ==================== */}
       <div
-        className={`absolute top-0 bottom-0 right-0 w-1/2 bg-[#FAF7F2] border-l border-[#E2D1C3] shadow-2xl flex flex-col justify-between p-6 sm:p-12 transition-transform duration-[1300ms] ease-[cubic-bezier(0.77,0,0.175,1)] ${
+        className={`absolute top-0 bottom-0 right-0 w-1/2 bg-[#FAF7F2] border-l border-[#E2D1C3] shadow-2xl flex flex-col justify-between p-4 xs:p-6 sm:p-12 transition-transform duration-[1300ms] ease-[cubic-bezier(0.77,0,0.175,1)] ${
           isOpen ? 'translate-x-full' : 'translate-x-0'
         }`}
         style={{
@@ -168,26 +165,23 @@ export const InvitationDoorIntro: React.FC<InvitationDoorIntroProps> = ({
         <div className="absolute inset-0 bg-[radial-gradient(#E8DACF_1px,transparent_1px)] [background-size:16px_16px] opacity-35 pointer-events-none" />
 
         {/* Outer decorative golden border */}
-        <div className="absolute inset-4 sm:inset-8 border-2 border-[#D9C4B5] pointer-events-none rounded-r-2xl">
+        <div className="absolute inset-3 sm:inset-8 border-2 border-[#D9C4B5] pointer-events-none rounded-r-2xl">
           <div className="absolute inset-1 border border-[#EADBCE] rounded-r-xl" />
         </div>
 
-        {/* Center content on Right Door: Bride Initial Crest */}
-        <div className="relative z-10 text-center sm:text-left sm:pl-8 space-y-3 my-auto">
+        {/* Outer content on Right Door: Bride Initial Crest (Đưa hẳn ra phía ngoài bên phải để không bị nơ che) */}
+        <div className="relative z-10 flex flex-col items-end text-right pr-3 xs:pr-6 sm:pr-10 md:pr-14 lg:pr-18 pl-1 sm:pl-24 lg:pl-32 my-auto space-y-2 xs:space-y-3 max-w-[92%] sm:max-w-[76%] self-end">
           {/* Circular Gold Crest with Bride's Short Name */}
-          <div className="inline-flex items-center justify-center w-16 h-16 sm:w-24 sm:h-24 rounded-full border-2 border-[#CBB3A2] bg-[#F4EDE5] shadow-inner">
-            <span className="font-script text-3xl sm:text-5xl text-[#7E4B3D] font-bold">
+          <div className="self-end inline-flex items-center justify-center w-14 h-14 xs:w-16 xs:h-16 sm:w-22 sm:h-22 md:w-24 md:h-24 rounded-full border-2 border-[#CBB3A2] bg-[#F4EDE5] shadow-inner transition-transform hover:scale-105">
+            <span className="font-script text-2xl xs:text-3xl sm:text-4xl md:text-5xl text-[#7E4B3D] font-normal leading-none">
               {weddingData.bride.shortName || 'CD'}
             </span>
           </div>
 
           <div>
-            <p className="text-[10px] sm:text-xs uppercase tracking-widest text-[#9C8476] font-medium">
+            <p className="font-serif-title text-[9.5px] xs:text-[11px] sm:text-xs uppercase tracking-[0.25em] text-[#9C8476] font-semibold text-right">
               {t.door.brideLabel}
             </p>
-            <h3 className="font-serif-title text-base sm:text-2xl text-[#3D2C24] font-bold truncate">
-              {weddingData.bride.fullName}
-            </h3>
           </div>
         </div>
 
@@ -214,7 +208,7 @@ export const InvitationDoorIntro: React.FC<InvitationDoorIntroProps> = ({
                   setBowLoadFailed(true);
                 }
               }}
-              className="w-72 sm:w-96 md:w-[440px] max-w-[92vw] max-h-[55vh] object-contain pointer-events-none select-none transition-transform duration-300"
+              className="w-56 xs:w-64 sm:w-80 md:w-92 lg:w-[410px] max-w-[84vw] max-h-[48vh] object-contain pointer-events-none select-none transition-transform duration-300"
               draggable={false}
             />
           </div>
@@ -222,14 +216,14 @@ export const InvitationDoorIntro: React.FC<InvitationDoorIntroProps> = ({
           {/* CALL TO ACTION BUTTON */}
           <div className="mt-0 sm:mt-1 text-center flex flex-col items-center">
             {guestName && (
-              <div className="mb-2.5 px-4 py-1.5 rounded-full bg-white/95 text-[#63493C] border border-[#DECDBB] shadow-md flex items-center gap-1.5 text-xs sm:text-sm font-medium animate-bounce">
+              <div className="mb-2 px-3.5 py-1.5 rounded-full bg-white/95 text-[#63493C] border border-[#DECDBB] shadow-md flex items-center gap-1.5 text-xs sm:text-sm font-medium animate-bounce">
                 <Sparkles className="w-3.5 h-3.5 text-[#B87A65]" />
-                <span>{t.door.dearGuest} <strong className="font-serif-title font-bold text-[#7E4B3D] text-sm sm:text-base">{guestName}</strong></span>
+                <span>{t.door.dearGuest} <strong className="font-script text-base sm:text-lg font-normal text-[#7E4B3D]">{guestName}</strong></span>
               </div>
             )}
             <button
               type="button"
-              className="px-7 py-2.5 sm:px-9 sm:py-3 rounded-full bg-gradient-to-r from-[#8C5D4B] via-[#A8725E] to-[#7A4E3E] hover:from-[#7A4E3E] hover:to-[#6B4233] text-white font-medium text-xs sm:text-sm tracking-wide shadow-[0_10px_25px_rgba(100,60,40,0.35)] hover:shadow-[0_14px_32px_rgba(100,60,40,0.5)] border-2 border-[#F7EFE6]/90 flex items-center gap-2 transform active:scale-95 transition-all group-hover:scale-105"
+              className="px-6 py-2 sm:px-8 sm:py-2.5 rounded-full bg-gradient-to-r from-[#8C5D4B] via-[#A8725E] to-[#7A4E3E] hover:from-[#7A4E3E] hover:to-[#6B4233] text-white font-medium text-xs sm:text-sm tracking-wide shadow-[0_10px_25px_rgba(100,60,40,0.35)] hover:shadow-[0_14px_32px_rgba(100,60,40,0.5)] border-2 border-[#F7EFE6]/90 flex items-center gap-2 transform active:scale-95 transition-all group-hover:scale-105"
             >
               <Heart className="w-4 h-4 fill-white text-white animate-bounce" />
               <span className="font-bold whitespace-nowrap">{t.door.touchBowToOpen}</span>
